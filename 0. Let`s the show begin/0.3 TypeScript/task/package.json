@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "compile": "npx tsc index.ts && node index.js"
+  }
+}
