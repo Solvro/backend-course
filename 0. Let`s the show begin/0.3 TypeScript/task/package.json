@@ -1,8 +1,10 @@
 {
   "devDependencies": {
+    "tsx": "^4.16.5",
     "typescript": "^5.5.4"
   },
   "scripts": {
-    "compile": "npx tsc index.ts && node index.js"
+    "compile": "npx tsc index.ts && node index.js",
+    "watch": "npx tsx watch index.ts"
   }
 }
