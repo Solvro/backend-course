@@ -1,0 +1,16 @@
+{
+  "name": "wstep-zadanie-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "joke": "node extra3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "one-liner-joke": "^1.2.2"
+  }
+}
