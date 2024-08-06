@@ -18,18 +18,39 @@ const rlInterface = rl.createInterface({
   output: process.stdout,
 });
 
-rlInterface.question("Input joke category: \n", (answer) => {
-  const allowedCategories = ["stupid", "racist", "animal", "women", "car"];
-  if (allowedCategories.includes(answer)) {
-    rlInterface.close();
+// rlInterface.question("Input joke category: \n", (answer) => {
+//   const allowedCategories = ["stupid", "racist", "animal", "women", "car"];
+//   if (allowedCategories.includes(answer)) {
+//     rlInterface.close();
 
-    const randomJoke = olj.getRandomJokeWithTag(answer.trim());
-    if (randomJoke) {
-      console.log(randomJoke.body);
+//     const randomJoke = olj.getRandomJokeWithTag(answer.trim());
+//     if (randomJoke) {
+//       console.log(randomJoke.body);
+//     } else {
+//       console.log("No joke lol");
+//     }
+//   } else {
+//     console.log("errored category");
+//   }
+// });
+
+const readFromUser = new Promise((resolve, reject) => {
+    rlInterface.question('Input joke category: ', (answer) => {
+        const allowedCategories = ["stupid", "racist", "animal", "women", "car"];
+        if (allowedCategories.includes(answer)) {
+            resolve(answer)
+        } else {
+            reject(answer)
+        }
+        rlInterface.close()
+    })
+})
+
+readFromUser.then(res => {
+    const joke = olj.getRandomJokeWithTag(res)
+    if (joke) {
+        console.log(joke.body);
     } else {
-      console.log("No joke lol");
+        console.log('Joke is empty');
     }
-  } else {
-    console.log("errored category");
-  }
-});
+}).catch(err => console.log('Bad category'))
