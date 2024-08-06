@@ -2,5 +2,8 @@
   "type": "module",
   "dependencies": {
     "one-liner-joke": "^1.2.2"
+  },
+  "scripts": {
+   "joke": "node index.js"
   }
 }

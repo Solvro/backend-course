@@ -18,26 +18,27 @@ const rlInterface = rl.createInterface({
   output: process.stdout,
 });
 
-// rlInterface.question("Input joke category: \n", (answer) => {
-//   const allowedCategories = ["stupid", "racist", "animal", "women", "car"];
-//   if (allowedCategories.includes(answer)) {
-//     rlInterface.close();
 
-//     const randomJoke = olj.getRandomJokeWithTag(answer.trim());
-//     if (randomJoke) {
-//       console.log(randomJoke.body);
-//     } else {
-//       console.log("No joke lol");
-//     }
-//   } else {
-//     console.log("errored category");
-//   }
-// });
+const checkValidCategory = (answer) => {
+    const allowedCategories = ["stupid", "animal", "women", "car"]
+    return allowedCategories.includes(answer)
+}
+
+const getJoke = (answer) => {
+    const joke = olj.getRandomJokeWithTag(answer)
+    let text
+    if (joke) {
+        text = joke.body
+    } else {
+        text = 'Joke is empty'
+    }
+    console.log(text);
+}
 
 const readFromUser = new Promise((resolve, reject) => {
     rlInterface.question('Input joke category: ', (answer) => {
-        const allowedCategories = ["stupid", "racist", "animal", "women", "car"];
-        if (allowedCategories.includes(answer)) {
+        
+        if (checkValidCategory(answer)) {
             resolve(answer)
         } else {
             reject(answer)
@@ -47,10 +48,5 @@ const readFromUser = new Promise((resolve, reject) => {
 })
 
 readFromUser.then(res => {
-    const joke = olj.getRandomJokeWithTag(res)
-    if (joke) {
-        console.log(joke.body);
-    } else {
-        console.log('Joke is empty');
-    }
+    getJoke(res)
 }).catch(err => console.log('Bad category'))
