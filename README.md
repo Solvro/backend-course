@@ -43,3 +43,4 @@ Jesteśmy ludźmi i robimy to we własnym czasie. Dlatego o ile będę wyznacza�
 
 Jeszcze raz na koniec chciałbym serdecznie wam podziękować za podjęcie się tego kursu i mam nadzieję, że kończąc go będziecie gotowi wkroczyć w świat backendu 🥰. 
 
+:copyright: KN Solvro 2024
