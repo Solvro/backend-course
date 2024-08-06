@@ -7,23 +7,29 @@
 // zweryfikuj czy dane zgadzają się
 
 // używając getRandomJokeWithTag z wcześniej zaimportowanej biblioteki pobierz i wyświetl żart
-const olj = require('one-liner-joke')
-const rl = require('node:readline')
-const {stdin: input, stdout: output} = require('node:process')
+import readline from "node:readline";
+import oneLinerJoke from "one-liner-joke";
 
-const rlInterface = rl.createInterface({input, output})
+const rl = readline
+const olj = oneLinerJoke
 
-rlInterface.question('Input joke category: \n', (answer) => {
-    const allowedCategories = ['stupid', 'racist', 'animal', 'women', 'car']
-    if (allowedCategories.includes(answer)){
-        const randomJoke = olj.getRandomJokeWithTag(answer.trim())
-        if (randomJoke){
-            console.log(randomJoke.body);
-        } else {
-            console.log('No joke lol');
-        }
+const rlInterface = rl.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rlInterface.question("Input joke category: \n", (answer) => {
+  const allowedCategories = ["stupid", "racist", "animal", "women", "car"];
+  if (allowedCategories.includes(answer)) {
+    rlInterface.close();
+
+    const randomJoke = olj.getRandomJokeWithTag(answer.trim());
+    if (randomJoke) {
+      console.log(randomJoke.body);
     } else {
-        console.log('errored category');
+      console.log("No joke lol");
     }
-    rlInterface.close()
-})
+  } else {
+    console.log("errored category");
+  }
+});
