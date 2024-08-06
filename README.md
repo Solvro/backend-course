@@ -1,7 +1,9 @@
 # Kurs "Od zera do backend developera"
 
-<center><img src="https://solvro.pwr.edu.pl/logo/solvro.png" /></center>
-<br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7c32ec09-c2ac-4961-82e6-a98f04220510"/>
+</p>
+
 Siemanko 👋, niezmiernie miło mi was powitać w ćwiczeniowej części naszego kursu backendowo-devopsowego. To właśnie tu spędzicie najwięcej czasu i poświęcicie najwięcej flustracji. Ćwiczenia podzielone są wg. rozdziałów kursu i będą na bieżąco się pojawiać. 
 
 ## Lista rozdziałow
