@@ -27,7 +27,7 @@ dla przykładu zadania z pierwszego rozdziału w moim przypadku powinny być na 
 ```
 dawid-linek/chapter-0
 ```
-Na danym branchu pracujemy i rozwiązujemy wszystkie zadania danego rodziału wraz z zadaniami dodatkowymi. Niektóre rodziały będą posiadały opcjonalne zadania, będzie to wyraźnie zaznaczone i możemy je wykonać wg. naszego uznania.
+Na danym branchu pracujemy i rozwiązujemy zadania danego rodziału, każde zadanie posiada treść główną oraz dodatkowe zagadnienia rozwijające już napisany kod. Niektóre rodziały będą posiadały opcjonalne zadania, będzie to wyraźnie zaznaczone i możemy je wykonać wg. naszego uznania.
 
 ### Commity
 Trzymając się dobrych praktyk pracy z GitHubem robimy dość dobrze opisane częste commity (np. po wykonaniu zadania, przed wykonaniem zadania dodatkowego). Jak dokładnie robić commity znajdziemy w [handbooku GitHuba](https://docs.google.com/document/d/1Sb5lYqYLnYuecS1Essn3YwietsbuLPCTsTuW0EMpG5o).
