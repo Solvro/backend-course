@@ -4,6 +4,9 @@
     "one-liner-joke": "^1.2.2"
   },
   "scripts": {
-   "joke": "node index.js"
+    "joke": "node index.js"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.5"
   }
 }

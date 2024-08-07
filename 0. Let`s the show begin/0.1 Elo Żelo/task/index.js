@@ -7,11 +7,5 @@ let text = 'Elo Żelo'
 
 for (let i = 0; i < mins; i++) {
     console.log(text);
-    if (i != mins - 1){
-        textToAppend = text + '\n'
-    } else {
-        textToAppend = text
-    }
-
-    fs.appendFileSync(fileName, textToAppend)
+    fs.appendFileSync(fileName, text + (mins-1 == i ? '' : '\n'))
 }

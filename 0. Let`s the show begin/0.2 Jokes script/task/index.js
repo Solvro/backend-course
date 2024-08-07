@@ -10,40 +10,31 @@
 import readline from "node:readline";
 import oneLinerJoke from "one-liner-joke";
 
-const rl = readline
-const olj = oneLinerJoke
-
-const rlInterface = rl.createInterface({
+const readlineInterface = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
 
 const checkValidCategory = (answer) => {
-    const allowedCategories = ["stupid", "animal", "women", "car"]
+    const allowedCategories = ["animal", "car", "women", "men", 'life', 'sport', 'sarcastic']
     return allowedCategories.includes(answer)
 }
 
 const getJoke = (answer) => {
-    const joke = olj.getRandomJokeWithTag(answer)
-    let text
-    if (joke) {
-        text = joke.body
-    } else {
-        text = 'Joke is empty'
-    }
-    console.log(text);
+    const joke = oneLinerJoke.getRandomJokeWithTag(answer)
+    console.log(joke?.body ?? 'Joke is empty');
 }
 
 const readFromUser = new Promise((resolve, reject) => {
-    rlInterface.question('Input joke category: ', (answer) => {
+    readlineInterface.question('Input joke category: ', (answer) => {
         
         if (checkValidCategory(answer)) {
             resolve(answer)
         } else {
             reject(answer)
         }
-        rlInterface.close()
+        readlineInterface.close()
     })
 })
 
