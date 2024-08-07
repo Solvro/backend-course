@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "comp": "npx tsc index.ts | node index.js",
+    "watch": "npx tsx watch index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.5",
+    "typescript": "^5.5.4"
+  }
+}
