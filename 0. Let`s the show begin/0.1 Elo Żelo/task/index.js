@@ -1,7 +1,12 @@
-// pobierz bibliotekę do obsługi plików
+const fs = require("fs");
+const minutes = new Date().getMinutes();
+let content = "";
 
-// zapisz aktualną ilość minut używając klasy Date
+for (let i = 0; i < minutes; i++) {
+    content += "Elo żelo\n";
+}
 
-// wypisz w pętli Elo Żelo
-
-// zapisz w pliku odpowiednią ilośc Elo Żelo
+fs.writeFile("Elo żelo.txt", content, err => {
+    if (err) console.log(err);
+    else console.log("File written successfully");
+})
