@@ -1,9 +1,16 @@
-// utwórz typ Studenta
+interface Student {
+  firstName: string;
+  lastName: string;
+  index: number;
+}
 
-// utwórz funkcję generującą email studenta na podstawie indexu
+const generateEmail = (student: Student) =>
+  `${student.index}@student.pwr.edu.pl`;
 
-// utwórz obiekt studenta wraz z typem
+const student = {
+  firstName: "Bartosz",
+  lastName: "Gotowski",
+  index: 272647,
+} satisfies Student;
 
-// wygeneruj i wyświetl email dla studenta
-
-// skompiluj i uruchom kod
+console.log(generateEmail(student));

@@ -1,9 +1,54 @@
-// załaduj biblotekę node:readline do obsługi pobierania danych z konsoli
-// załaduj biblotekę one-liner-joke, którą wcześniej zainstalował*ś
+import rl from "node:readline/promises";
+import { getRandomJokeWithTag } from "one-liner-joke";
+import { styleText } from "node:util";
 
-// utwórz interfejs, za pomocą którego będziesz mógł prowadzić interakcję z cli (terminalem)
+/**
+ * @returns {Promise<string>} Category from user
+ */
+const getCategory = async () => {
+  const consoleInterface = rl.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
-// używając interfejsu zadaj pytanie o kategorię żartu
-// zweryfikuj czy dane zgadzają się
+  return consoleInterface.question(
+    "Hello jello, jaka kategoria żartu wariacie?\n"
+  );
+};
 
-// używając getRandomJokeWithTag z wcześniej zaimportowanej biblioteki pobierz i wyświetl żart
+/**
+ * @param {string} category
+ * @returns {boolean} Whether category is valid
+ */
+const isValidCategory = (category) => {
+  const VALID_CATEGORIES = [
+    "animal",
+    "car",
+    "men",
+    "women",
+    "life",
+    "sport",
+    "sarcastic",
+  ];
+
+  return VALID_CATEGORIES.includes(category);
+};
+
+const category = await getCategory();
+
+if (!isValidCategory(category)) {
+  console.log(
+    styleText(
+      "red",
+      `Kategoria ${styleText(
+        "bold",
+        category
+      )} nie jest prawidłowa, próbuj dalej hehe`
+    )
+  );
+
+  process.exit(1);
+}
+
+console.log(getRandomJokeWithTag(category).body);
+process.exit(0);

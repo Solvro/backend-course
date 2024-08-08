@@ -1,0 +1,17 @@
+{
+  "name": "task",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "joke": "node index.js"
+  },
+  "dependencies": {
+    "one-liner-joke": "^1.2.2"
+  },
+  "volta": {
+    "node": "22.6.0"
+  },
+  "engines": {
+    "node": "22.6.0"
+  }
+}
