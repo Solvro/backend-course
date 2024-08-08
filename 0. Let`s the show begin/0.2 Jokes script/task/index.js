@@ -1,9 +1,42 @@
-// załaduj biblotekę node:readline do obsługi pobierania danych z konsoli
-// załaduj biblotekę one-liner-joke, którą wcześniej zainstalował*ś
+import * as readline from 'node:readline/promises';
+import { stdin as input, stdout as output } from 'node:process';
+import oneLinerJoke from 'one-liner-joke';
 
-// utwórz interfejs, za pomocą którego będziesz mógł prowadzić interakcję z cli (terminalem)
+/**
+   * Gets a tag from console, and validates it
+   * @return {Promise<string>}      Valid tag from list
+   */
+const getValidTagFromConsole = async () => {
+    const rl = readline.createInterface({ input, output });
+    const tag = await rl.question("Joke from what category would you like to hear?: ");
 
-// używając interfejsu zadaj pytanie o kategorię żartu
-// zweryfikuj czy dane zgadzają się
+    const allowed = ["animal", "car", "men", "women", "life", "sport", "sarcastic"];
 
-// używając getRandomJokeWithTag z wcześniej zaimportowanej biblioteki pobierz i wyświetl żart
+    rl.close();
+
+    if (!allowed.includes(tag)) {
+        console.log(tag, "is not correct joke category (animal, car, men, women, life, sport, sarcastic)");
+        process.exit();
+    }
+
+    return tag;
+};
+
+/**
+   * Show a joke from given category
+   * @param {string} tag    Tag to get the joke
+   */
+const displayTheJokeWithTag = (tag) => {
+    const joke = oneLinerJoke.getRandomJokeWithTag(tag);
+    console.log("Ok, here is the joke:", joke.body);
+};
+
+/**
+   * Main function of this module
+   */
+const main = async () => {
+    const tag = await getValidTagFromConsole();
+    displayTheJokeWithTag(tag);
+};
+
+main();
