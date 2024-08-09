@@ -7,7 +7,7 @@ const cli = readline.createInterface({
     output: process.stdout,
 });
 
-const question = util.promisify(cli.question);
+const question = util.promisify(cli.question).bind(cli);
 
 const givenJokeTag = await question("Joke from what category would you like to hear? : ");
 const availableTags = ["animal", "car", "men", "women", "life", "sport", "sarcastic"];
