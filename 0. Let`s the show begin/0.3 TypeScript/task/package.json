@@ -1,0 +1,11 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "script": "npx tsc index.ts && node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
