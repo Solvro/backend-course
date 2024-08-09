@@ -1,7 +1,7 @@
-// pobierz bibliotekę do obsługi plików
+const fs = require('fs');
 
-// zapisz aktualną ilość minut używając klasy Date
+const minutes = new Date().getMinutes();
+const contentToPrint = "Elo Żelo \n".repeat(minutes);
 
-// wypisz w pętli Elo Żelo
-
-// zapisz w pliku odpowiednią ilośc Elo Żelo
+fs.writeFileSync(`./Elo żelo file.txt`, contentToPrint);
+console.log(contentToPrint);
