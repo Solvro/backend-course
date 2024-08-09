@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.text('name').unique()
 
-      table.timestamp('created_at').default('NOW()')
+      table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })
   }

@@ -12,7 +12,7 @@ export default class extends BaseSchema {
 
       table.date('date_of_birth')
 
-      table.timestamp('created_at').default('NOW()')
+      table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })
   }
