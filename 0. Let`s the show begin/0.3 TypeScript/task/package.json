@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "script": "npx tsc index.ts && node index.js"
+    "script": "npx tsc index.ts && node index.js",
+    "watch": "npx tsx watch index.ts"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "tsx": "^4.17.0"
+  }
 }
