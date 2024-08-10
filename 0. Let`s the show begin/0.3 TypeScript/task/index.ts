@@ -1,9 +1,17 @@
-// utwórz typ Studenta
+type Student = {
+    firstName:  string;
+    lastName:   string;
+    index:      number;
+};
 
-// utwórz funkcję generującą email studenta na podstawie indexu
+function getEmailFromStudent(student: Student): string {
+    return `${student.index}@student.pwr.edu.pl`;
+}
 
-// utwórz obiekt studenta wraz z typem
+const exampleStudent: Student = {
+    firstName: "Mateusz",
+    lastName: "Płaska",
+    index: 280480
+};
 
-// wygeneruj i wyświetl email dla studenta
-
-// skompiluj i uruchom kod
+console.log(getEmailFromStudent(exampleStudent));
