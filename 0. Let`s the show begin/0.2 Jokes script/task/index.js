@@ -9,15 +9,43 @@ const i = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-const tags = ["animal", "car", "men", "women", "life", "sport", "sarcastic"]
+
+// Nazwa funkcji: Is_Valid()
+// Zmienne przyjmowane: data (String)  
+// Wartość zwracana: boolean
+// Opis działania funcji:
+// funkcja sprawdza czy podana kategoria należy do wybranego zakresu kategorii
+// 
+// 
+
+function Is_Valid(data) {
+    const tags = ["animal", "car", "men", "women", "life", "sport", "sarcastic"]
+    if (tags.includes(data)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+// Nazwa funkcji: Create_Joke()
+// Zmienne przyjmowane: cat (String)
+// Wartość zwracana: komunikat o błędzie lub żart (String)
+// Opis działania funcji:
+// funkcja wykorzystuje sprawdza poprawność kategorii używając funkcji Is_Valid() 
+// po czym przy wykorzystaniu funkcji getRandomJokeWithTag()
+// generuje żart na podstawie podanej kategorii,
+// jeżeli kategoria jest niepoprawna zwraca komunikat 'Niewłaściwa kategoria'
+function Create_Joke(cat) {
+    if (Is_Valid(cat)) {
+        return joke.getRandomJokeWithTag(cat).body
+    } else {
+        return "Niewłaściwa kategoria"
+    }
+}
+
 const get_data = util.promisify(i.question).bind(i)
 get_data("Jaka kategoria żartu wariacie: ").then(data => {
-    let r = joke.getRandomJokeWithTag(data).body
-    if (!tags.includes(data)) {
-        console.log("Niewłaściwa kategoria")
-    } else {
-        console.log(r)
-    }
+    console.log(Create_Joke(data));
     i.close()
 }).catch(err => {
     console.error(err)
