@@ -4,9 +4,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts":   "npx tsc index.ts && node index.js"
+    "ts": "npx tsc index.ts && node index.js",
+    "watch": "npx tsx watch index.ts"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "tsx": "^4.17.0"
+  }
 }
