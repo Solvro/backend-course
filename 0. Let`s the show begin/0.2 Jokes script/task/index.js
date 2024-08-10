@@ -3,7 +3,6 @@
 import joke from "one-liner-joke"
 import util from "util";
 import readline from "node:readline";
-import { get } from "http";
 // utwórz interfejs, za pomocą którego będziesz mógł prowadzić interakcję z cli (terminalem)
 const i = readline.createInterface({
     input: process.stdin,
