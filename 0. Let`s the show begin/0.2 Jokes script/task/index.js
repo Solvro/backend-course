@@ -1,9 +1,9 @@
 // załaduj biblotekę node:readline do obsługi pobierania danych z konsoli
 // załaduj biblotekę one-liner-joke, którą wcześniej zainstalował*ś
-const joke = require("one-liner-joke")
-const inp = require("node:readline")
+import joke from "one-liner-joke"
+import readline from "node:readline";
 // utwórz interfejs, za pomocą którego będziesz mógł prowadzić interakcję z cli (terminalem)
-const i = inp.createInterface({
+const i = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
