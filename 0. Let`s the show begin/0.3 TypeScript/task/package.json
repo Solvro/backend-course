@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "tsc index.ts && node index.js",
+    "watch": "npx tsx watch index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
+  }
+}
