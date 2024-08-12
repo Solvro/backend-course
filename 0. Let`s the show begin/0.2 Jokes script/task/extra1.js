@@ -1,5 +1,5 @@
-const readline = require('node:readline');
-const oneLinerJoke = require('one-liner-joke');
+import readline from 'node:readline';
+import oneLinerJoke from 'one-liner-joke';
 
 const cliInterface = readline.createInterface({
     input: process.stdin,
