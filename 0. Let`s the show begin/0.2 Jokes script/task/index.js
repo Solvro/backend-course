@@ -8,8 +8,10 @@
 
 // używając getRandomJokeWithTag z wcześniej zaimportowanej biblioteki pobierz i wyświetl żart
 
-const readline = require("node:readline");
-const oljoke = require("one-liner-joke");
+// const readline = require("node:readline");
+// const oneLinerJoke = require("one-liner-joke");
+import readline from "node:readline";
+import oneLinerJoke from "one-liner-joke";
 
 const cli = readline.createInterface({
   input: process.stdin,
@@ -25,7 +27,7 @@ cli.question("Joke from what category would you like to hear?", (tag) => {
     cli.close();
   }
 
-  const joke = oljoke.getRandomJokeWithTag(tag).body;
+  const joke = oneLinerJoke.getRandomJokeWithTag(tag).body;
   console.log(joke);
   cli.close();
 });
