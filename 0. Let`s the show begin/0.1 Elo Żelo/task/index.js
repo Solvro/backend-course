@@ -1,7 +1,17 @@
-// pobierz bibliotekę do obsługi plików
+const fs = require('fs');
 
-// zapisz aktualną ilość minut używając klasy Date
+const now = new Date();
+const minutes = now.getMinutes();
 
-// wypisz w pętli Elo Żelo
+const phrase = "Elo żelo";
 
-// zapisz w pliku odpowiednią ilośc Elo Żelo
+let output = '';
+for (let i = 0; i < minutes; i++) {
+    console.log(phrase);  
+    output += phrase + '\n';  
+}
+
+fs.writeFile('Elo żelo.txt', output, (err) => {
+    if (err) throw err;
+    console.log('Zapisano frazę do pliku Elo żelo.txt');
+});
