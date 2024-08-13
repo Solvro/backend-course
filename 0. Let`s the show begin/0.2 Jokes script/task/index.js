@@ -98,7 +98,7 @@ function validateJokeTag(jokeTag, process) {
     process.exit();
   }
 }
-//displays tag
+//displays joke
 function displayJoke(jokeTag) {
   const joke = getRandomJokeWithTag(jokeTag);
   console.log(joke.body);
