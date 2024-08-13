@@ -1,9 +1,17 @@
-// załaduj biblotekę node:readline do obsługi pobierania danych z konsoli
-// załaduj biblotekę one-liner-joke, którą wcześniej zainstalował*ś
+const readline = require("node:readline");
+const jokeLib = require("one-liner-joke");
 
-// utwórz interfejs, za pomocą którego będziesz mógł prowadzić interakcję z cli (terminalem)
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-// używając interfejsu zadaj pytanie o kategorię żartu
-// zweryfikuj czy dane zgadzają się
-
-// używając getRandomJokeWithTag z wcześniej zaimportowanej biblioteki pobierz i wyświetl żart
+let tags = ["animal", "car", "men", "women", "life", "sport", "sarcastic"];
+rl.question("Joke from what category would you like to hear? ", answer => {
+    if(!tags.includes(answer)) {
+        console.error(`${answer} is not correct joke category (${tags.join(", ")})`);
+    } else {
+        console.log(jokeLib.getRandomJokeWithTag(answer).body);
+    }
+    rl.close();
+})
