@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "joke": "node extra3.js"
+  },
   "type": "module",
   "dependencies": {
     "one-liner-joke": "^1.2.2"
