@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "index": "npx tsc index.ts && node index.js"
+  },
   "devDependencies": {
     "typescript": "^5.5.4"
   }
