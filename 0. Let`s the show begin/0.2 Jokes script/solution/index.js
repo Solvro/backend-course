@@ -1,20 +1,34 @@
-const readline = require('node:readline');
-const oneLinerJoke = require('one-liner-joke');
+import readline from "node:readline";
+import oneLinerJoke from "one-liner-joke";
 
-const cli = readline.createInterface({
+const readlineInterface = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 
-cli.question("Joke from what category would you like to hear? : ", jokeTag => {
-    const allowedCategories = ["animal", "car", "men", "women", "life", "sport", "sarcastic"]
-    if (!allowedCategories.includes(jokeTag)) {
-        console.error(`${jokeTag} is not correct joke category (${allowedCategories.join(', ')})`)
-        process.exit()
-    }
-    cli.close();
 
-    const joke = oneLinerJoke.getRandomJokeWithTag(jokeTag)
-    console.log(`Ok, here is the joke: ${joke.body}`)
-});
+const checkValidCategory = (answer) => {
+    const allowedCategories = ["animal", "car", "women", "men", 'life', 'sport', 'sarcastic']
+    return allowedCategories.includes(answer)
+}
 
+const getJoke = (answer) => {
+    const joke = oneLinerJoke.getRandomJokeWithTag(answer)
+    console.log(joke?.body ?? 'Joke is empty');
+}
+
+const readFromUser = new Promise((resolve, reject) => {
+    readlineInterface.question('Input joke category: ', (answer) => {
+
+        if (checkValidCategory(answer)) {
+            resolve(answer)
+        } else {
+            reject(answer)
+        }
+        readlineInterface.close()
+    })
+})
+
+readFromUser.then(res => {
+    getJoke(res)
+}).catch(err => console.log('Bad category'))
