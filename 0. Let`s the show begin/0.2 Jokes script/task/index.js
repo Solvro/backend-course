@@ -1,29 +1,23 @@
-import readline from 'node:readline'
-import oneLinerJoke from 'one-liner-joke'
+import readline from "node:readline";
+import oneLinerJoke from "one-liner-joke";
 
-const cli = readline.createInterface({
+const readlineInterface = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
-let allowedCategories = ["animal", "car", "men", "women", "life", "sport", "sarcastic"]
-askForJokeCategory();
 
+const allowedCategories = ["animal", "car", "men", "women", "life", "sport", "sarcastic"];
 
-function askForJokeCategory() {
-    cli.question("Joke from what category would you like to hear? : ", jokeTag => {
-        allowedCategories
-        if (!allowedCategories.includes(jokeTag)) {
-            console.error(`Provided ${jokeTag} is not correct category, available categories" (${allowedCategories})`)
-            askForJokeCategory();
-        } else {
-            showJoke(jokeTag);
-            process.exit();
-        }
-    })
-}
+const getJoke = (category) => {
+    const joke = oneLinerJoke.getRandomJokeWithTag(category);
+    console.log(joke?.body ?? 'Joke is empty');
+};
 
-function showJoke(jokeTag) {
-    const joke = oneLinerJoke.getRandomJokeWithTag(jokeTag)
-    console.log(`Your joke: ${joke.body}`)
-}
-
+readlineInterface.question('Input joke category: ', (answer) => {
+    if (allowedCategories.includes(answer)) {
+        getJoke(answer);
+    } else {
+        console.log('Bad category');
+    }
+    readlineInterface.close();
+});
