@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.uuid('section_id').references('id').inTable('sections').onDelete('CASCADE')
       table.string('url', 255)
       table.text('description')
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').notNullable()
+      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('updated_at')
     })
   }
 

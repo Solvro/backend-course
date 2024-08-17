@@ -12,8 +12,8 @@ export default class extends BaseSchema {
       table.timestamp('started_at')
       table.timestamp('completed_at')
       table.smallint('evaluation')
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').notNullable()
+      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('updated_at')
     })
   }
 

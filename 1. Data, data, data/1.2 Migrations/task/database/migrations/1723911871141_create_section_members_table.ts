@@ -9,8 +9,8 @@ export default class extends BaseSchema {
       table.uuid('id').primary().notNullable().unique().defaultTo(this.raw('uuid_generate_v4()'))
       table.uuid('student_id').references('id').inTable('students').onDelete('CASCADE')
       table.uuid('section_id').references('id').inTable('sections').onDelete('CASCADE')
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').notNullable()
+      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('updated_at')
     })
   }
 

@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.string('first_name', 255).notNullable()
       table.string('last_name', 255).notNullable()
       table.enu('status', ['IMPLEMENTATION', 'ACTIVE', 'HONORABLE', 'INACTIVE']).notNullable().defaultTo('IMPLEMENTATION')
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').notNullable()
+      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('updated_at')
     })
   }
 
