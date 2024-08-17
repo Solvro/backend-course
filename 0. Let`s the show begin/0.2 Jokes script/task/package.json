@@ -1,0 +1,13 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "one-liner-joke": "^1.2.2"
+  },
+  "scripts": {
+    "joke": "node index.js"
+  }
+}

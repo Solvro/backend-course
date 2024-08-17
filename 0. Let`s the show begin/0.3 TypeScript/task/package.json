@@ -1,0 +1,10 @@
+{
+  "name": "task",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx tsx watch index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.17.0"
+  }
+}
