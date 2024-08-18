@@ -23,6 +23,6 @@ export default defineConfig({
   */
   providers: [
     () => import('@adonisjs/core/providers/app_provider'),
-    () => import('@adonisjs/lucid/database_provider')
+    () => import('@adonisjs/lucid/database_provider'),
   ],
 })
