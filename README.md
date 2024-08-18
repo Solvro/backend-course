@@ -8,7 +8,7 @@ Siemanko 👋, niezmiernie miło mi was powitać w ćwiczeniowej części naszeg
 
 ## Lista rozdziałow
 0. [Wstęp (Let`s the show begin)](https://docs.google.com/document/d/1FR6PSLg_5G0hWC429dXyeJLonLf76L1LbHH8ycVNavA)
-1. Jak i gdzie przechowywać dane (Data, data, data…) – bazy danych, struktury danych , migracje, seedery.
+1. [Jak i gdzie przechowywać dane (Data, data, data…) – bazy danych, struktury danych , migracje, seedery](https://docs.google.com/document/d/1jKi6RAydbj4XiA4YVXEbgYfzhQ23mmKHIR9D9SrwF2o/edit)
 2. Reprezentacja danych (Look at me I’m a model) – modele, CRUD
 3. Wyświetlanie danych (Let me see)  – ścieżki,  widoki, formsy,  validatory
 4. Podstawy API (Let’s communicate) – REST, Headery, Standardy, Dokumentacja
