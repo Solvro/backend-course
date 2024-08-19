@@ -20,6 +20,7 @@ export default class extends BaseSchema {
   }
 
   async down() {
+    this.schema.raw('DROP TYPE IF EXISTS "member_status"')
     this.schema.dropTable(this.tableName)
   }
 }

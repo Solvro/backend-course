@@ -16,9 +16,25 @@ export default class extends BaseSchema {
       
       table.timestamps(true)
     })
+
+    this.schema.raw('CREATE EXTENSION IF NOT EXISTS unaccent;') // example how to add extension to our database
+    this.schema.raw("CREATE OR REPLACE FUNCTION generate_course_slug_if_not_exists() RETURNS TRIGGER AS $$ "
+      +"BEGIN"
+      +" IF NEW.link IS NULL THEN"
+      +"   NEW.link := trim(BOTH '-' FROM regexp_replace(lower(unaccent(trim(NEW.name))), '[^a-z0-9\\-_]+', '-', 'gi'));"
+      +"   NEW.link := CONCAT('https://solvro.pl/blog/', NEW.link);"
+      +" END IF;"
+      +" RETURN NEW;"
+      +"END;"
+      +"$$ LANGUAGE 'plpgsql';")
+
+    this.schema.raw("CREATE TRIGGER generate_course_slug_link BEFORE INSERT ON courses FOR ROW EXECUTE PROCEDURE generate_course_slug_if_not_exists();")
   }
 
   async down() {
+    this.schema.raw('DROP TYPE IF EXISTS "category"')
+
     this.schema.dropTable(this.tableName)
+    this.schema.raw('drop function generate_course_slug_if_not_exists() cascade;')
   }
 }

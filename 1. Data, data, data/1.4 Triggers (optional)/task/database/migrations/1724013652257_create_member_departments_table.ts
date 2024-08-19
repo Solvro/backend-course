@@ -17,6 +17,7 @@ export default class extends BaseSchema {
   }
 
   async down() {
+    this.schema.raw('DROP TYPE IF EXISTS "departments"')
     this.schema.dropTable(this.tableName)
   }
 }
