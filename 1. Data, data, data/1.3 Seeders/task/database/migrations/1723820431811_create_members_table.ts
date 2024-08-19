@@ -6,13 +6,16 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.integer('index').primary()
+      table.string('name', 25).notNullable()
+      table.string('surname', 50).notNullable()
 
-      table.string('first_name')
-      table.string('last_name')
-      table.enum('status', ['implementation', 'active', 'alumni', 'inactive'])
+      table.enu('status', ['ACITVE', 'NOT_ACITVE', 'NEW', 'HONORED'], {
+        useNative: true,
+        enumName: 'member_status',
+        existingType: false,
+      }).notNullable()
 
-      table.timestamp('created_at').defaultTo('NOW()')
-      table.timestamp('updated_at')
+      table.timestamps(true)
     })
   }
 

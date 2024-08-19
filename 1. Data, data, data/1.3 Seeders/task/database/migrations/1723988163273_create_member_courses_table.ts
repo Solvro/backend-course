@@ -5,18 +5,15 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-
       table.integer('member_index').references('members.index').onDelete('CASCADE')
-      table.integer('course_id').references('courses.id').onDelete('CASCADE')
+      table.string('course_name').references('courses.name').onDelete('CASCADE')
+      
+      table.date('starting_date').nullable()
+      table.date('ending_date').nullable()
 
-      table.integer('grade', 2).nullable()
+      table.tinyint('grade').nullable()
 
-      table.date('started_date')
-      table.date('ended_date').nullable()
-
-      table.timestamp('created_at').defaultTo('NOW()')
-      table.timestamp('updated_at')
+      table.timestamps(true)
     })
   }
 

@@ -6,11 +6,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.integer('member_index').references('members.index').onDelete('CASCADE')
-      table.integer('department_id').references('departments.id').onDelete('RESTRICT')
+      table.enu('departments', ['BACKEND', 'FRONTEND', 'DEVOPS', 'UI', 'ML', 'PM'], {
+        useNative: true,
+        enumName: 'departments',
+        existingType: false,
+      }).notNullable()
 
-      table.timestamp('created_at').defaultTo('NOW()')
-
-      table.index(['member_index', 'department_id'])
+      table.timestamps(true)
     })
   }
 
