@@ -12,7 +12,7 @@ export default class extends BaseSchema {
 
       table.date('start_date').notNullable()
       table.date('end_date').nullable()
-      table.tinyint('grade').checkBetween([1, 10], 'grade must be between 1 and 10').nullable()
+      table.tinyint('grade').checkBetween([1, 10]).nullable()
 
       table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
