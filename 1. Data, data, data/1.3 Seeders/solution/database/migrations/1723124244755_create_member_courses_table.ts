@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.integer('member_index').references('members.index').onDelete('CASCADE')
-      table.integer('course_id').references('members.index').onDelete('CASCADE')
+      table.integer('course_id').references('courses.id').onDelete('CASCADE')
 
       table.integer('grade', 2).nullable()
 
