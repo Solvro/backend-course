@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.string('url_link').nullable()
       table.string('description').nullable()
 
-      table.timestamps(true)
+      table.timestamps(true, true)
     })
   }
 

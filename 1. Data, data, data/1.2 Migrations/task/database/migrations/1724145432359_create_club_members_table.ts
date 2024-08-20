@@ -15,7 +15,7 @@ export default class extends BaseSchema {
         existingType: false
       }).notNullable()
 
-      table.timestamps(true)
+      table.timestamps(true, true)
     })
   }
 

@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.date('end_date').nullable()
       table.tinyint('grade').nullable()
 
-      table.timestamps(true)
+      table.timestamps(true, true)
     })
   }
 

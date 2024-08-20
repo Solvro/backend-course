@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.integer('department_id').unsigned().references('departments.id').onDelete('CASCADE')
       table.integer('member_id').unsigned().references('club_members.index').onDelete('RESTRICT')
 
-      table.timestamps(true)
+      table.timestamps(true, true)
     })
   }
 

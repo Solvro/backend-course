@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.string('name').notNullable()
 
-      table.timestamps(true)
+      table.timestamps(true, true)
     })
   }
 
