@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Kur from './kur.js'
+import Czlonek from './czlonek.js'
 
 export default class Uczestnictwo extends BaseModel {
   @column({ isPrimary: true, columnName: 'id_wpisu' })
@@ -19,4 +22,14 @@ export default class Uczestnictwo extends BaseModel {
 
   @column()
   declare ocena?: number
+
+  @belongsTo(() => Kur, {
+    foreignKey: 'nazwa_kursu',
+  })
+  kur: BelongsTo<typeof Kur>
+
+  @belongsTo(() => Czlonek, {
+    foreignKey: 'id_czlonka',
+  })
+  czlonek: BelongsTo<typeof Czlonek>
 }
