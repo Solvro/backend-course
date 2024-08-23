@@ -1,6 +1,6 @@
 import { BaseCommand, args } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import db from '@adonisjs/lucid/services/db'
+import SolvroMember from '../app/models/solvro_member.js'
 
 export default class CreateMember extends BaseCommand {
   static commandName = 'create:member'
@@ -59,10 +59,10 @@ export default class CreateMember extends BaseCommand {
         }
       )
     }
-    await db.table('solvro_members').insert({
-      index: this.index,
-      first_name: this.firstName,
-      last_name: this.lastName,
+    await SolvroMember.create({
+      index: Number(this.index),
+      firstName: this.firstName,
+      lastName: this.lastName,
       status: member_status
         ? member_status.charAt(0).toUpperCase() + member_status.slice(1).toLowerCase()
         : null,
