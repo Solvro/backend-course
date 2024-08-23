@@ -15,18 +15,12 @@ export default class extends BaseSchema {
           existingType: false,
         })
         .nullable()
-      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('created_at').defaultTo(this.now())
       table.timestamp('updated_at')
     })
   }
 
   async down() {
-    //droping TYPE not working, idk why -> cannot run migration:fresh
-    //okay - lack of semicolon at the end was the problem...
-    //interesting, because in docs there is no semicolon
-    //https://lucid.adonisjs.com/docs/table-builder#enum--enu
-    //UPDATE: semicolon wasn't the problem, idk what is, but raw SQL doesnt work
-    //        so I need to run migration:fresh with --drop-types flag
     this.schema.dropTable(this.tableName)
     this.schema.raw('DROP TYPE IF EXISTS "member_status"')
   }

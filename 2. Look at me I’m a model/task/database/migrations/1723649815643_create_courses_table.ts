@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('name', 100).unique()
       table.integer('section_id').references('sections.id').notNullable()
       table.text('description').nullable()
-      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('created_at').defaultTo(this.now())
       table.timestamp('updated_at')
     })
 

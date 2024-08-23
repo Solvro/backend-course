@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.primary(['member_index', 'section_id'])
       table.date('joined_at').notNullable()
       table.date('left_at').nullable()
-      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('created_at').defaultTo(this.now())
       table.timestamp('updated_at')
     })
   }

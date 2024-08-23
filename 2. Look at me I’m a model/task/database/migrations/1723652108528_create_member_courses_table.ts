@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.date('start_date').notNullable()
       table.date('end_date').nullable()
       table.integer('grade').checkBetween([1, 10]).nullable()
-      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('created_at').defaultTo(this.now())
       table.timestamp('updated_at')
     })
   }
