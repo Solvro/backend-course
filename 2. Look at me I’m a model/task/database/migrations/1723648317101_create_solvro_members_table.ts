@@ -8,11 +8,15 @@ export default class extends BaseSchema {
       table.integer('index').primary()
       table.string('first_name', 100).notNullable()
       table.string('last_name', 100).notNullable()
-      table.enum('status', ['Active', 'Inactive', 'Trainee', 'Honorary'], {
-        useNative: true,
-        enumName: 'member_status',
-        existingType: false
-      }).nullable()
+      table
+        .enum('status', ['Active', 'Inactive', 'Trainee', 'Honorary'], {
+          useNative: true,
+          enumName: 'member_status',
+          existingType: false,
+        })
+        .nullable()
+      table.timestamp('created_at').defaultTo('NOW()')
+      table.timestamp('updated_at')
     })
   }
 
