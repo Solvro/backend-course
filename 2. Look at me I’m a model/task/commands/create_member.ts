@@ -10,13 +10,19 @@ export default class CreateMember extends BaseCommand {
     startApp: true,
   }
 
-  @args.string()
+  @args.string({
+    required: false,
+  })
   declare index: string
 
-  @args.string()
+  @args.string({
+    required: false,
+  })
   declare firstName: string
 
-  @args.string()
+  @args.string({
+    required: false,
+  })
   declare lastName: string
 
   static allowedStatus = ['trainee', 'active', 'inactive', 'honorary']
@@ -27,11 +33,39 @@ export default class CreateMember extends BaseCommand {
   declare status: string
 
   async run() {
+    let member_status: string | null = this.status
+
+    if (!this.index) {
+      this.index = await this.prompt.ask('Enter member index:', {
+        validate(value) {
+          return Number(value) ? true : 'Index must be a number!'
+        },
+      })
+    }
+    if (!this.firstName) {
+      this.firstName = await this.prompt.ask('Enter member first name:')
+    }
+    if (!this.lastName) {
+      this.lastName = await this.prompt.ask('Enter member last name:')
+    }
+    if (!this.status) {
+      member_status = await this.prompt.choice(
+        'Choose status of member',
+        CreateMember.allowedStatus.concat('None'),
+        {
+          result(value) {
+            return value === 'None' ? null : value
+          },
+        }
+      )
+    }
     await db.table('solvro_members').insert({
       index: this.index,
       first_name: this.firstName,
       last_name: this.lastName,
-      status: this.status ? this.status.charAt(0) + this.status.slice(1).toLowerCase() : null,
+      status: member_status
+        ? member_status.charAt(0).toUpperCase() + member_status.slice(1).toLowerCase()
+        : null,
     })
   }
 
@@ -40,7 +74,7 @@ export default class CreateMember extends BaseCommand {
       this.logger.error(this.error.message)
       return true
     } else {
-      console.log(`Solvro member {${this.parsed.args}} was succesfully created.`)
+      console.log(`Solvro member was succesfully created.`)
     }
   }
 }
