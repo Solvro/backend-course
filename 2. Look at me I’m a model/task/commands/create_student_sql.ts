@@ -4,7 +4,7 @@ import db from '@adonisjs/lucid/services/db'
 
 export default class CreateStudent extends BaseCommand {
   static commandName = 'create:student-sql'
-  static description = 'Create a new student using rawQuery'
+  static description = 'Create a new student using raw query builder'
   static aliases = ['make:student-sql']
 
   static options: CommandOptions = {
@@ -52,7 +52,7 @@ export default class CreateStudent extends BaseCommand {
           'INSERT INTO student_specializations (student_index, specialization) VALUES (:index, :spec)',
           {
             index: this.index,
-            spec: specialization?.charAt(0).toUpperCase() + specialization?.slice(1).toLowerCase(),
+            spec: specialization.toLowerCase(),
           }
         )
       }

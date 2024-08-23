@@ -5,8 +5,8 @@ export default class extends BaseSeeder {
   async run() {
     await db.rawQuery(
       'INSERT INTO specializations (name) VALUES ' +
-        "('Backend'), ('Devops'), ('Frontend'), " +
-        "('UI'), ('ML'), ('Mobile');"
+        "('backend'), ('devops'), ('frontend'), " +
+        "('ui'), ('ml'), ('mobile');"
     )
   }
 }
