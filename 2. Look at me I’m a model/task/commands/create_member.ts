@@ -27,19 +27,14 @@ export default class CreateMember extends BaseCommand {
   declare status: string
 
   async run() {
-    await db.rawQuery(
-      `INSERT INTO solvro_members (index, first_name, last_name, status)
-      VALUES (:index, :first_name, :last_name, :status)`,
-      {
-        index: this.index,
-        first_name: this.firstName,
-        last_name: this.lastName,
-        status: this.status
-          ? this.status.charAt(0).toUpperCase() + this.status.slice(1).toLowerCase() //Values in status db TYPE start with upper case letter...
-          : null,
-      }
-    )
+    await db.table('solvro_members').insert({
+      index: this.index,
+      first_name: this.firstName,
+      last_name: this.lastName,
+      status: this.status ? this.status.charAt(0) + this.status.slice(1).toLowerCase() : null,
+    })
   }
+
   async completed() {
     if (this.error) {
       this.logger.error(this.error.message)
