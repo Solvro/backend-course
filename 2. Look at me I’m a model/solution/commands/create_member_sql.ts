@@ -44,7 +44,7 @@ export default class CreateMemberSql extends BaseCommand {
       firstName: this.firstName,
       lastName: this.lastName
     })
-
+    
     if (this.departmentsIds) {
       await db.rawQuery("INSERT INTO member_departments (member_index, department_id) values " +
         this.departmentsIds.map(departmentId => `(${this.index},'${departmentId}')`).join(',')
