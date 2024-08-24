@@ -35,12 +35,14 @@ export default class TestModelCourse extends BaseCommand {
       console.log(`${c.id}---${c.name}`)
     })
 
+    console.log(`Url of course (should be slugified): ${test?.resourceLink}`)
+
+    test ? (test.name = 'Testowy kurs po aktualizacji') : null
+    await test?.save()
+    console.log(`Url of course after update(should be slugified): ${test?.resourceLink}`)
+
     await test?.delete()
 
     console.log(`Test course deleted.`)
-
-    const od_zera_do_dev = await Course.findBy('name', 'Od zera do programisty 15k')
-    await od_zera_do_dev?.load('members')
-    console.log(od_zera_do_dev?.members)
   }
 }

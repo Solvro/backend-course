@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, manyToMany, afterSave } from '@adonisjs/lucid/orm'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Section from './section.js'
 import SolvroMember from './solvro_member.js'
+import slugify from '@sindresorhus/slugify'
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -39,4 +40,9 @@ export default class Course extends BaseModel {
     pivotRelatedForeignKey: 'member_index',
   })
   declare members: ManyToMany<typeof SolvroMember>
+
+  @afterSave()
+  static slugifyUrl(course: Course) {
+    course.resourceLink = `https://solvro.pl/blog/${slugify(course.name)}`
+  }
 }
