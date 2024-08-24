@@ -37,15 +37,18 @@ export default class ModelsCreateMember extends BaseCommand {
   declare departmentsIds: string[]
 
   async run() {
-    await db.rawQuery("INSERT INTO members (index, name, surname) VALUES (:index, :firstName, :lastName)", {
+    await db.table('members').insert({
       index: this.index,
-      firstName: this.firstName,
-      lastName: this.lastName
+      name: this.firstName,
+      surname: this.lastName
     })
 
     if (this.departmentsIds) {
-      await db.rawQuery("INSERT INTO member_departments (member_index, department_id) values " +
-        this.departmentsIds.map(departmentId => `(${this.index},'${departmentId}')`).join(',')
+      await db.table('member_departments').multiInsert(
+        this.departmentsIds.map(departmentId => ({
+          member_index: this.index,
+          department_id: departmentId
+        }))
       )
     }
   }
