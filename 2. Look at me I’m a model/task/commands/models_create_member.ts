@@ -1,52 +1,32 @@
-import { args, BaseCommand } from '@adonisjs/core/ace'
+import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
 import db from '@adonisjs/lucid/services/db'
 
 export default class ModelsCreateMember extends BaseCommand {
   static commandName = 'create:member'
-  static description = 'Create member from rawQuery'
+  static description = 'Create member from prompt'
 
   static options: CommandOptions = {
     startApp: true
   }
 
-  @args.string({
-    description: "Index of the new member. Must be unique.",
-    required: true
-  })
-  declare index: string
-
-  @args.string({
-    argumentName: 'first-name',
-    description: "Name of the new member.",
-    required: true
-  })
-  declare firstName: string
-
-  @args.string({
-    argumentName: 'last-name',
-    description: "Last name of the new member.",
-    required: true
-  })
-  declare lastName: string
-
-  @args.spread({
-    description: "Departments of the new member",
-    required: false,
-  })
-  declare departmentsIds: string[]
-
   async run() {
-    await db.table('members').insert({
-      index: this.index,
-      name: this.firstName,
-      surname: this.lastName
+    const [newMember] = await db.table('members').returning('index').insert({
+      index: await this.prompt.ask("Enter new member index: ", {
+        validate: (value) => (Number.isInteger(Number(value)) && value.length === 6) ? true : "Index must be 6 digit numeric"
+      }),
+      name: await this.prompt.ask("Enter first name: "),
+      surname: await this.prompt.ask("Enter surname: ")
     })
 
-    if (this.departmentsIds) {
+    const departments = await this.prompt.multiple("Select member departments",
+      await db.from('departments').select('id as name', 'name as message')
+    )
+
+    if (departments) {
       await db.table('member_departments').multiInsert(
-        this.departmentsIds.map(departmentId => ({
-          member_index: this.index,
+        departments.map(departmentId => ({
+          member_index: newMember.index,
           department_id: departmentId
         }))
       )
