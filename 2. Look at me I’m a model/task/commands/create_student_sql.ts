@@ -2,7 +2,7 @@ import { BaseCommand, args } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
 import db from '@adonisjs/lucid/services/db'
 
-export default class CreateStudent extends BaseCommand {
+export default class CreateStudentSql extends BaseCommand {
   static commandName = 'create:student-sql'
   static description = 'Create a new student using raw query builder'
   static aliases = ['make:student-sql']
