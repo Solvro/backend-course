@@ -1,10 +1,10 @@
-function getEmail(student) {
-    return "".concat(student.index, "@student.pwr.edu.pl");
+function studentEmail(user) {
+    return user.firstName + user.lastName + '.' + user.index + '@student.pwr.edu.pl';
 }
-var stud = {
-    firstName: 'Jakub',
-    lastName: 'Morawiec',
-    index: 272411,
+var student1 = {
+    firstName: 'szymon',
+    lastName: 'protyński',
+    index: 280479,
 };
-var email = getEmail(stud);
-console.log(email);
+var getStudentsEmail = studentEmail(student1);
+console.log(getStudentsEmail);

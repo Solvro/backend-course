@@ -1,18 +1,22 @@
 type Student = {
-    firstName: string
-    lastName: string
-    index: number
-}
+    firstName:string;
+    lastName:string;
+    index:number;
+    
+  };
+  
+  function studentEmail(user: Student): string {
+    return user.firstName + user.lastName + '.' + user.index + '@student.pwr.edu.pl';
+  }
+  
+  const student1: Student = {
+    firstName:'szymon',
+    lastName:'protyński',
+    index:280479,
+  };
+  
+  const getStudentsEmail: string = studentEmail(student1);
+  
+  console.log(getStudentsEmail);
 
-function getEmail(student: Student): string {
-    return `${student.index}@student.pwr.edu.pl`
-}
-
-const stud: Student = {
-    firstName: 'Jakub',
-    lastName: 'Morawiec',
-    index: 272411,
-}
-
-const email = getEmail(stud)
-console.log(email)
+  
