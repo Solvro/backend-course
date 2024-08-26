@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('name', 25).notNullable()
       table.string('surname', 50).notNullable()
 
-      table.enu('status', ['ACITVE', 'NOT_ACITVE', 'NEW', 'HONORED'], {
+      table.enu('status', ['ACTIVE', 'NOT_ACTIVE', 'NEW', 'HONORED'], {
         useNative: true,
         enumName: 'member_status',
         existingType: false,

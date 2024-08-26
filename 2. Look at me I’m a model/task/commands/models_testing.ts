@@ -11,18 +11,12 @@ export default class ModelsTesting extends BaseCommand {
   }
 
   async run() {
-    /*await Member.create({
-      index: 123456,
-      name: 'John',
-      surname: 'Doe',
-      status: 'NEW'
-    }) */
-    const member = await Member.find(123456)
-    if (member) {
-      /*await member.merge({
-        name: "Joe"
-      }).save()*/
-      member.delete()
-    }
+    const member = await Member.query()
+      .where('index', 123456)  // Replace `memberIndex` with the actual member index or use a different query method
+      .preload('departments')
+      .firstOrFail()
+    
+      const departments = member.departments
+      console.log(departments)
   }
 }
