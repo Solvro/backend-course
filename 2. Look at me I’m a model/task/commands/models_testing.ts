@@ -1,3 +1,4 @@
+import Course from '#models/course'
 import Member from '#models/member'
 import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
@@ -16,7 +17,18 @@ export default class ModelsTesting extends BaseCommand {
       .preload('departments')
       .firstOrFail()
     
-      const departments = member.departments
-      console.log(departments)
+    const departments = member.departments
+    console.log(departments)
+
+    const course = new Course()
+
+    course.name = 'Frontend course'
+    course.departmentId = 1  
+    course.description = 'A beginner course on frontend fundamentals.'
+    await course.save()
+  
+    console.log('Course created with URL:', course.link)
+    
+    
   }
 }
