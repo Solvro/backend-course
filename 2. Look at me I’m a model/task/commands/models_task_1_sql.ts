@@ -20,10 +20,12 @@ export default class ModelsTask1Sql extends BaseCommand {
   }
 
   async run() {
-    await db.rawQuery(
-      'INSERT INTO members (index, first_name, last_name, status) VALUES (?, ?, ?, ?)',
-      [this.index, this.first_name, this.last_name, this.status]
-    )
+    await db.table('members').insert({
+      index: this.index,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      status: this.status,
+    })
     this.logger.info('Added new member')
   }
 }
