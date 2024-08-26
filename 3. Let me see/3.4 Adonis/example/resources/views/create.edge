@@ -11,6 +11,11 @@
 
 <body>
     <a href="/"><- Powrót</a>
+
+    @each(error in flashMessages.get('errors'))
+    <p style="color:red">{{error}}</p>
+    @endeach
+
     <form action="/create" method="POST">
         {{ csrfField() }}
         <input type="number" placeholder="Index" name="index">
