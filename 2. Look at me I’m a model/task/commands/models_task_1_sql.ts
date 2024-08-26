@@ -1,6 +1,6 @@
 import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import db from '@adonisjs/lucid/services/db'
+import Member from '#models/member'
 
 export default class ModelsTask1Sql extends BaseCommand {
   static commandName = 'create:member'
@@ -12,7 +12,7 @@ export default class ModelsTask1Sql extends BaseCommand {
 
   async run() {
     const index: string = await this.prompt.ask('Enter member index')
-    const firsName: string = await this.prompt.ask('Enter member first name')
+    const firstName: string = await this.prompt.ask('Enter member first name')
     const lastName: string = await this.prompt.ask('Enter member last name')
     const status: string = await this.prompt.choice('Enter member status:', [
       'wdrożeniowy',
@@ -21,11 +21,11 @@ export default class ModelsTask1Sql extends BaseCommand {
       'nieaktywny',
     ])
 
-    await db.table('members').insert({
-      index: index,
-      first_name: firsName,
-      last_name: lastName,
-      status: status,
+    await Member.create({
+      index,
+      firstName,
+      lastName,
+      status,
     })
     this.logger.info('Added new member')
   }
