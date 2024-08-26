@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Students table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <a href="/create">Dodaj nowego studenta -></a>
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Szczegóły</th>
+        </tr>
+
+        @each(student in students)
+        <tr>
+            <td>{{student.index}}</td>
+            <td>{{student.firstName}}</td>
+            <td>{{student.lastName}}</td>
+            <td><a href="/{{student.index}}">Szczegóły -></a></td>
+        </tr>
+        @endeach
+    </table>
+</body>
+
+</html>
