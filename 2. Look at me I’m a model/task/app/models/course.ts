@@ -17,6 +17,7 @@ export default class Course extends BaseModel {
   @column()
   declare description: string | null
 
+  // exercise 4
   @computed()
   get linkGenerated(): string {
     return `https://solvro/blog/${this.slugify(this.name)}`
