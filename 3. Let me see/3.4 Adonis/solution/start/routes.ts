@@ -8,5 +8,15 @@
 */
 
 import router from '@adonisjs/core/services/router'
+const MembersController = () => import('#controllers/members_controller')
 
-router.on('/').render('pages/home')
+router
+  .group(() => {
+    router.get('', [MembersController, 'index'])
+    router.get('create', [MembersController, 'create'])
+    router.post('create', [MembersController, 'store'])
+    router.get(':index', [MembersController, 'show'])
+  })
+  .prefix('members')
+
+router.on('*').redirect('/members')
