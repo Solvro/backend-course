@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Students table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    @!component('components/link', { text: '<- Powrót' , link:`/` })
+    <h2>Index: {{student.index}}</h2>
+    <h2>Imię: {{student.firstName}}</h2>
+    <h2>Nazwisko: {{student.lastName}}</h2>
+    <h2>Data urodzenia: {{student.dateOfBirth.toFormat('yyyy-LL-dd')}}</h2>
+    <h2>Mail: {{student.index}}@student.pwr.edu.pl</h2>
+    <h2>Utworzono: {{student.createdAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</h2>
+    <h2>Zaktualizowano: {{student.updatedAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</h2>
+</body>
+
+</html>
