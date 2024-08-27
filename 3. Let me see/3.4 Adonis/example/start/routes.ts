@@ -12,10 +12,13 @@ import { createStudentValidator } from '#validators/student'
 import router from '@adonisjs/core/services/router'
 import { DateTime } from 'luxon'
 
-router.get('/', async ({ view }) => {
-  return view.render('students', {
-    students: await Student.all(),
-  })
+router.get('/', async ({ view, request }) => {
+  const page = Number(request.input('page', 1))
+  const limit = 10
+  const students = await Student.query()
+    .limit(limit)
+    .offset(limit * (page - 1))
+  return view.render('students', { students, page })
 })
 
 router.get('create', ({ view }) => view.render('create'))

@@ -27,7 +27,17 @@
             <td><a href="/{{student.index}}">Szczegóły -></a></td>
         </tr>
         @endeach
+        
     </table>
+    <hr/>
+
+    @if(page>1)
+        <a href="?page={{page-1}}">Poprzednia strona</a>
+    @endif
+
+    @if(students.length == 10)
+        <a href="?page={{page+1}}">Następna strona</a>
+    @endif
 </body>
 
 </html>
