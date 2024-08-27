@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a href="/"><- Powrót</a>
+    @!component('components/link', { text: '<- Powrót' , link:`/` })
 
     @each(error in flashMessages.get('errors'))
     <p style="color:red">{{error}}</p>

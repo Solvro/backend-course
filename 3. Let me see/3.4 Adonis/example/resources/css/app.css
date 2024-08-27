@@ -8,3 +8,15 @@ body {
   height: 100%;
   width: 100%;
 }
+
+.color-gold,.color-gold:active {
+  color: gold
+}
+
+.underline-none {
+  text-decoration: none;
+}
+
+.hover-underline-gold:hover {
+  text-decoration: underline;
+}

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a href="/create">Dodaj nowego studenta -></a>
+    @!component('components/link', { text: 'Dodaj nowego studenta ->', link:'/create' })
     <table>
         <tr>
             <th>Index</th>
@@ -24,19 +24,21 @@
             <td>{{student.index}}</td>
             <td>{{student.firstName}}</td>
             <td>{{student.lastName}}</td>
-            <td><a href="/{{student.index}}">Szczegóły -></a></td>
+            <td>
+                 @!component('components/link', { text: 'Szczegóły ->' , link:`/${student.index}` })
+            </td>
         </tr>
         @endeach
-        
+
     </table>
-    <hr/>
+    <hr />
 
     @if(page>1)
-        <a href="?page={{page-1}}">Poprzednia strona</a>
+        @!component('components/link', { text: 'Poprzednia strona' , link:`?page=${page-1}` })
     @endif
 
     @if(students.length == 10)
-        <a href="?page={{page+1}}">Następna strona</a>
+        @!component('components/link', { text: 'Następna strona' , link:`?page=${page+1}` })
     @endif
 </body>
 

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a href="/"><- Powrót</a>
+    @!component('components/link', { text: '<- Powrót' , link:`/` })
     <h2>Index: {{student.index}}</h2>
     <h2>Imię: {{student.firstName}}</h2>
     <h2>Nazwisko: {{student.lastName}}</h2>
