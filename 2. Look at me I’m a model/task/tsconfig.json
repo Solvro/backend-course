@@ -2,7 +2,9 @@
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
   "esModuleInterop": true,
   "compilerOptions": {
-    "rootDir": "./",
-    "outDir": "./build",
-  },
+    "baseUrl": ".",
+    "paths": {
+      "@ioc:Adonis/*": ["node_modules/@adonisjs/*"]
+    }
+  }
 }
