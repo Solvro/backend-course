@@ -1,5 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed, hasMany, manyToMany } from '@adonisjs/lucid/orm'
+import Department from './department.js'
+import * as relations from '@adonisjs/lucid/types/relations'
+import MemberCourse from './member_course.js'
+import Member from './member.js'
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -24,6 +28,16 @@ export default class Course extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Department)
+  declare department: relations.BelongsTo<typeof Department>
+
+  @manyToMany(() => Member, {
+    pivotTable: 'members_courses',
+    pivotForeignKey: 'course_id',
+    pivotRelatedForeignKey: 'member_index',
+  })
+  declare members: relations.ManyToMany<typeof Member>
 
   private slugify(name: string): string {
     return name
