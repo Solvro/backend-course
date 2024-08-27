@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeSave, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
 import ClubMember from './club_member.js'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Department from './department.js'
+import slugify from '@sindresorhus/slugify'
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -38,4 +39,9 @@ export default class Course extends BaseModel {
     pivotTimestamps: true
   })
   declare club_members: ManyToMany<typeof ClubMember>
+
+  @beforeSave()
+  public static async generateUrl(course : Course) {
+    course.urlLink = `https://solvro.pl/blog/${slugify(course.name)}`
+  }
 }

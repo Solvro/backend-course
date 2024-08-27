@@ -17,9 +17,7 @@ export default class Department extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @hasMany(() => Course, {
-    foreignKey: 'department_id'
-  })
+  @hasMany(() => Course)
   declare courses: HasMany<typeof Course>
   
   @manyToMany(() => ClubMember, {
