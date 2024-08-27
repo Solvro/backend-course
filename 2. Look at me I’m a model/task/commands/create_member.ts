@@ -51,7 +51,7 @@ export default class CreateMember extends BaseCommand {
       this.logger.error('Index must be a integer number')
       return
     } 
-
+    
     const statusPossibleValues = ['Active', 'Inactive', 'Trainee', 'Honorary'] as const
     if(!statusPossibleValues.includes(this.status as any)) {
       this.logger.error(`Status "${this.status}" is incorrect. Available values: ${statusPossibleValues.join(', ')}`)
@@ -69,7 +69,7 @@ export default class CreateMember extends BaseCommand {
       }
     }
 
-
+    
     await db.rawQuery("INSERT INTO club_members (`index`, first_name, last_name, status) VALUES (:index, :firstName, :lastName, :status)", {
       index: Number(this.index),
       firstName: this.firstName,
