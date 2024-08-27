@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.integer('course_id').references('courses.course_id')
       table.integer('member_id').references('members.member_id')
-      table.timestamp('created_at')
+      table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })
   }

@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('first_name')
       table.string('last_name')
       table.enum('status', ['BREAK_IN', 'ACTIVE', 'NON_ACTIVE', 'HONORARY'])
-      table.timestamp('created_at')
+      table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })
   }

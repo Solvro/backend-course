@@ -14,7 +14,7 @@ export default class extends BaseSchema {
       table.string('name')
       table.string('url')
       table.string('description')
-      table.timestamp('created_at')
+      table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })
   }
