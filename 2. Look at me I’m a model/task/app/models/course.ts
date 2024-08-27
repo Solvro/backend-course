@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, belongsTo} from '@adonisjs/lucid/orm'
+var slugify = require('slugify')
 import SolvroMember from './solvro_member.js'
 import Department from './department.js'
+
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -38,4 +40,11 @@ export default class Course extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updated_at: DateTime
+
+  async generateURL(course: Course){
+    if(course.name){
+      const slug = slugify(course.name)
+      course.resources = `https://solvro.pl/blog/${slug}`
+    }
+  }
 }

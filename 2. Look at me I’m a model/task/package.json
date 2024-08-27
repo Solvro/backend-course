@@ -43,7 +43,8 @@
     "@adonisjs/lucid": "^21.2.0",
     "luxon": "^3.5.0",
     "pg": "^8.12.0",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "slugify": "^1.6.6"
   },
   "hotHook": {
     "boundaries": [
