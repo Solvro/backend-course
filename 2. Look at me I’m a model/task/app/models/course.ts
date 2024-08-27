@@ -1,8 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, computed, hasMany, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed, manyToMany } from '@adonisjs/lucid/orm'
 import Department from './department.js'
 import * as relations from '@adonisjs/lucid/types/relations'
-import MemberCourse from './member_course.js'
 import Member from './member.js'
 
 export default class Course extends BaseModel {
