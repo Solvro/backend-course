@@ -10,39 +10,28 @@
 </head>
 
 <body>
-<a href="/members/create">Dodaj nowego członka</a>
-@flashMessage('member-notification')
-<p style="color: green"> {{ $message }}</p>
-@end
+    <a href="/members/create">Dodaj nowego członka</a>
+    @flashMessage('member-notification')
+    <p style="color: green"> {{ $message }}</p>
+    @end
 
-    <table>
-        <tr>
-            <th>Index</th>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Szczegóły</th>
-        </tr>
+    @!component('components/table', {
+    data: members,
+    fields:[
+    'index',
+    'firstName',
+    'lastName',
+    ['Szczegóły', (member)=> `<a href='/members/${member.index}'>Szczegóły -></a>`]
+    ]})
 
-        @each(member in members)
-        <tr>
-            <td>{{member.index}}</td>
-            <td>{{member.firstName}}</td>
-            <td>{{member.lastName}}</td>
-            <td>
-                <a href="/members/{{member.index}}">Szczegóły -></a>
-            </td>
-        </tr>
-        @endeach
-
-    </table>
     <hr />
 
     Strony:
     @each(anchor in members.getUrlsForRange(1, members.lastPage))
-        <a href="/members{{ anchor.url }}">
+    <a href="/members{{ anchor.url }}">
         {{ anchor.page }}
-        </a>
-     @endeach
+    </a>
+    @endeach
 
 </body>
 
