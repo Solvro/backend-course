@@ -1,8 +1,16 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
+import {
+  BaseModel,
+  beforeCreate,
+  beforeSave,
+  belongsTo,
+  column,
+  manyToMany,
+} from '@adonisjs/lucid/orm'
 import Department from '#models/department'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Member from './member.js'
+import slugify from '@sindresorhus/slugify'
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -35,4 +43,11 @@ export default class Course extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @beforeCreate()
+  @beforeSave()
+  static async setUrl(course: Course) {
+    const nameSlug = slugify(course.name)
+    course.url = `https://solvro.pl/blog/${nameSlug}`
+  }
 }
