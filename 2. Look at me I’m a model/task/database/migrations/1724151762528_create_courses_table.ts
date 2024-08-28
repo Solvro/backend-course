@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.integer('field_id').references('fields.id').onDelete('RESTRICT')
       table.string('resource')
       table.string('description', 2000).nullable()
+      table.string('url').nullable()
       table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })
