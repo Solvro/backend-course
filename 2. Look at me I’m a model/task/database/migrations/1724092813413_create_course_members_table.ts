@@ -5,8 +5,9 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.integer('course_id').references('courses.course_id')
-      table.integer('member_id').references('members.member_id')
+      table.integer('course_id').references('courses.id').onDelete('CASCADE')
+      table.integer('member_id').references('members.id').onDelete('CASCADE')
+      table.integer('grade').checkBetween([1, 10])
       table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
     })

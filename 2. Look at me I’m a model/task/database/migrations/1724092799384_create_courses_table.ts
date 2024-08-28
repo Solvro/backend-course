@@ -5,12 +5,8 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('course_id')
-      table
-        .integer('department_id')
-        .references('department_id')
-        .inTable('departments')
-        .onDelete('CASCADE')
+      table.increments('id')
+      table.integer('department_id').references('id').inTable('departments').onDelete('CASCADE')
       table.string('name')
       table.string('url')
       table.string('description')
