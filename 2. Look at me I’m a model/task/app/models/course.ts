@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeSave, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
 import Student from '#models/student'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Specialization from '#models/specialization'
+import slugify from '@sindresorhus/slugify'
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -21,7 +22,8 @@ export default class Course extends BaseModel {
   declare link: string | null
 
   @belongsTo(() => Specialization, {
-    foreignKey: 'name',
+    localKey: 'name',
+    foreignKey: 'specialization',
   })
   declare spec: BelongsTo<typeof Specialization>
 
@@ -33,6 +35,13 @@ export default class Course extends BaseModel {
     pivotTimestamps: true,
   })
   declare students: ManyToMany<typeof Student>
+
+  @beforeSave()
+  static async slugifyLink(course: Course) {
+    if (course.$dirty.name) {
+      course.link = `https://solvro.pl/blog/${slugify(course.name)}`
+    }
+  }
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

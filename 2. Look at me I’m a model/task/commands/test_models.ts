@@ -26,6 +26,7 @@ export default class TestModels extends BaseCommand {
 
     const student = await Student.findOrFail(index)
     console.log(`Found student by index ${index}: ${student.firstName} ${student.lastName}`)
+    console.log(`Student's email: ${student.email}`)
 
     await student.related('specializations').attach(['backend', 'frontend'])
     await student.related('courses').create(
@@ -69,10 +70,10 @@ export default class TestModels extends BaseCommand {
     await course.related('spec').associate(await Specialization.findByOrFail('name', 'ml'))
     await course.related('students').attach({
       280568: {
-        start_date: DateTime.now(),
+        start_date: DateTime.now().startOf('quarter'),
       },
       274002: {
-        start_date: DateTime.now(),
+        start_date: DateTime.now().startOf('month'),
       },
     })
 

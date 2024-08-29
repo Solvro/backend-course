@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed, manyToMany } from '@adonisjs/lucid/orm'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 import Course from '#models/course'
 import Specialization from '#models/specialization'
@@ -16,6 +16,11 @@ export default class Student extends BaseModel {
 
   @column()
   declare status: 'IMPLEMENTATION' | 'ACTIVE' | 'ALUMNI' | 'INACTIVE'
+
+  @computed()
+  get email(): string {
+    return `${this.index}@student.pwr.edu.pl`
+  }
 
   @manyToMany(() => Specialization, {
     pivotTable: 'student_specializations',

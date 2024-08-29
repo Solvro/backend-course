@@ -23,14 +23,13 @@ export default class CreateStudentModel extends BaseCommand {
   declare specializations: string[]
 
   async run() {
-    await Student.create({
+    const student = await Student.create({
       index: Number.parseInt(this.index),
       firstName: this.firstName,
       lastName: this.lastName,
     })
 
-    // todo: save this.specializations to 'student_specializations' table
-    //  when the corresponding relationship will be added to student model
+    await student.related('specializations').attach(this.specializations || [])
 
     this.logger.success('Student created successfully!')
   }
