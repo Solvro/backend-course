@@ -7,6 +7,11 @@
 |
 */
 
+import ClubMembersController from '#controllers/club_members_controller'
 import router from '@adonisjs/core/services/router'
 
-router.on('/').render('pages/home')
+
+router.get('/members', [ClubMembersController, 'index'])
+
+
+router.on('*').redirect('/members')
