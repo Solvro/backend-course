@@ -12,6 +12,7 @@ import router from '@adonisjs/core/services/router'
 
 
 router.get('/members', [ClubMembersController, 'index'])
+router.get('/members/:index', [ClubMembersController, 'showMember']).where('index', /^[1-9]\d{5}$/)
 
 
 router.on('*').redirect('/members')

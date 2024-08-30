@@ -21,7 +21,7 @@
     <tbody>
       @each(member in members)
       <tr>
-        <td>{{ member.index }}</td>
+        <td><a href="/members/{{ member.index }}">{{ member.index }}</a></td>
         <td>{{ member.firstName }}</td>
         <td>{{ member.lastName }}</td>
       </tr>

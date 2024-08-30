@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club members list</title>
+
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <div class='student-details'>
+    <a href="/members">Back to club members list</a>
+    <h1>Member details</h1>
+    <ul>
+      <li><strong>Index:</strong> {{ member.index }}</li>
+      <li><strong>First Name:</strong> {{ member.firstName }}</li>
+      <li><strong>Last Name:</strong> {{ member.lastName }}</li>
+      <li><strong>Status:</strong> {{ member.status }}</li>
+      <li><strong>Email:</strong> {{ member.index }}@student.pwr.edu.pl </li>
+      <li><strong>Created:</strong> {{member.createdAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</li>
+      <li><strong>Updated:</strong> {{member.updatedAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</li>
+    </ul>
+    </div>
+</body>
+</html>
