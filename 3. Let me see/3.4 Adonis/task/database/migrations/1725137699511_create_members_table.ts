@@ -5,10 +5,10 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('index')
+      table.integer('index').primary()
       table.string('first_name')
       table.string('last_name')
-      table.string('status')
+      table.enu('status', ['onboarding', 'active', 'honorary', 'inactive'])
       table.timestamps(true)
     })
   }
