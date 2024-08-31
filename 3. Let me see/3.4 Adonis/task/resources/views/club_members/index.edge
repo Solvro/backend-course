@@ -16,26 +16,16 @@
         <p style="color: green; text-align: center; margin: 20px"><strong>{{ $message }}</strong></p>
     @end 
 
-    <table>
-      <thead>
-        <tr>
-          <th>Index</th>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        @each(member in members)
-        <tr>
-          <td><a href="/members/{{ member.index }}">{{ member.index }}</a></td>
-          <td>{{ member.firstName }}</td>
-          <td>{{ member.lastName }}</td>
-        </tr>
-        @endeach
-      </tbody>
-    </table>
-
-
+    @!component('components/table', {
+      data: members,
+      columns: [
+      { key: 'index', label: 'Index', class: 'index-column'},
+      { key: 'firstName', label: 'First name' },
+      { key: 'lastName', label: 'Last name' },
+      [{ key: 'details', label: 'Details', render: (member) => `<a href='/members/${member.index}'>Details</a>` }]
+    ]}) 
+    
+    
     <div class="pagination">
 
       @if(members.currentPage > 1)

@@ -1,0 +1,31 @@
+<table>
+    <thead>
+      <tr>
+        @each(column in columns)
+            <th>
+                @if(Array.isArray(column))
+                    {{column[0].label}}
+                @else
+                    {{column.label}}
+                @endif
+            </th>
+        @endeach
+      </tr>
+    </thead>
+    <tbody>
+      @each(row in data)
+        <tr>
+          @each(column in columns)
+          <td class="{{ column.class || '' }}">
+                @if(Array.isArray(column))
+                    {{{column[0].render(row)}}} 
+                @else
+                    {{row[column.key]}}
+                @endif
+          </td>
+          @endeach
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+  
