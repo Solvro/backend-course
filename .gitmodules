@@ -1,0 +1,3 @@
+[submodule "4. Let`s communicate/example/backend-cocktail-api"]
+	path = 4. Let`s communicate/example/backend-cocktail-api
+	url = https://github.com/Solvro/backend-cocktail-api
