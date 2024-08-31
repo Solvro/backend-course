@@ -9,9 +9,16 @@
 
 import MembersController from '#controllers/members_controller'
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
-router.group(()=>{
-  router.resource('members', MembersController).apiOnly().params({
-    members: 'index',
+router
+  .group(() => {
+    router
+      .resource('members', MembersController)
+      .apiOnly()
+      .params({
+        members: 'index',
+      })
+      .use(['store', 'update'], middleware.eloZeloAuth())
   })
-}).prefix('api/v1')
+  .prefix('api/v1')

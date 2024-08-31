@@ -1,5 +1,4 @@
 import Member from '#models/member'
-import Student from '#models/member'
 import { createMemberValidator } from '#validators/member'
 import type { HttpContext } from '@adonisjs/core/http'
 
