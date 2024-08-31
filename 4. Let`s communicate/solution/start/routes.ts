@@ -19,6 +19,6 @@ router
       .params({
         members: 'index',
       })
-      .use(['store', 'update'], middleware.eloZeloAuth())
+      .use(['store', 'update', 'destroy'], middleware.eloZeloAuth())
   })
   .prefix('api/v1')

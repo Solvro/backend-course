@@ -15,15 +15,15 @@ export default class MembersController {
    */
   async store({ request }: HttpContext) {
     const data = await createMemberValidator.validate(request.all())
-    await Member.create({ ...data })
-    return { message: 'Member successfully created.' }
+    const member = await Member.create({ ...data })
+    return { message: 'Member successfully created.', member }
   }
 
   /**
    * Show individual record
    */
   async show({ params }: HttpContext) {
-    return await Member.findByOrFail(params.index)
+    return await Member.findOrFail(params.index)
   }
 
   /**
@@ -31,14 +31,11 @@ export default class MembersController {
    */
   async update({ params, request }: HttpContext) {
     const data = await updateMemberValidator.validate(request.all())
-    const member = await Member.findByOrFail(params.index)
+    const member = await Member.findOrFail(params.index)
     member.merge(data)
     member.save()
 
-    return {
-      message: 'Member successfully updated.',
-      member,
-    }
+    return { message: 'Member successfully updated.', member }
   }
 
   /**
