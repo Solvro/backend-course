@@ -9,7 +9,13 @@
 </head>
 
 <body>
-  <h1 style="text-align:center">Club Members List</h1>
+  <h1>Club Members List</h1>
+  <a href="/members/create" class="add-member-button">Add new person</a>
+
+  @flashMessage('add-member-notification')
+      <p style="color: green; text-align: center; margin: 20px"><strong>{{ $message }}</strong></p>
+  @end 
+
   <table>
     <thead>
       <tr>

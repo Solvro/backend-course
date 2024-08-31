@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create member</title>
+
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <h1>Add new member</h1>
+
+    <a href="/members">Back to club members list</a>
+
+
+    @each(error in flashMessages.get('errors')) 
+        <p style="color: red;  text-align: center; margin: 20px" >{{ error }}</p>
+    @endeach
+
+
+    <form action="/members/create" method="POST">
+        {{ csrfField() }}
+        <label for="index">Index</label>
+        <input type="number" id="index" name="index" value="{{ old('index') || '' }}" required>
+    
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" value="{{ old('firstName') || '' }}" required>
+    
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" value="{{ old('lastName') || '' }}" required>
+    
+        <label for="status">Status</label>
+        <select id="status" name="status" value="{{ old('status') || '' }}" required>
+            <option value="Active" {{ old('status')=='Active' ? 'selected' : ''}}>Active
+            </option>
+            <option value="Inactive" {{ old('status')=='Inactive' ? 'selected' : ''}}>Inactive</option>
+            <option value="Trainee" {{ old('status')=='Trainee' ? 'selected' : ''}}>Trainee</option>
+            <option value="Honorary" {{ old('status')=='Honorary' ? 'selected' : ''}}>Honorary</option>
+        </select>    
+
+        <button type="submit">Add</button>
+    </form>     
+
+</body>
+</html>
