@@ -9,30 +9,48 @@
 </head>
 
 <body>
-  <h1>Club Members List</h1>
-  <a href="/members/create" class="add-member-button">Add new person</a>
+    <h1>Club Members List</h1>
+    <a href="/members/create" class="add-member-button">Add new person</a>
 
-  @flashMessage('add-member-notification')
-      <p style="color: green; text-align: center; margin: 20px"><strong>{{ $message }}</strong></p>
-  @end 
+    @flashMessage('add-member-notification')
+        <p style="color: green; text-align: center; margin: 20px"><strong>{{ $message }}</strong></p>
+    @end 
 
-  <table>
-    <thead>
-      <tr>
-        <th>Index</th>
-        <th>First name</th>
-        <th>Last name</th>
-      </tr>
-    </thead>
-    <tbody>
-      @each(member in members)
-      <tr>
-        <td><a href="/members/{{ member.index }}">{{ member.index }}</a></td>
-        <td>{{ member.firstName }}</td>
-        <td>{{ member.lastName }}</td>
-      </tr>
+    <table>
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        @each(member in members)
+        <tr>
+          <td><a href="/members/{{ member.index }}">{{ member.index }}</a></td>
+          <td>{{ member.firstName }}</td>
+          <td>{{ member.lastName }}</td>
+        </tr>
+        @endeach
+      </tbody>
+    </table>
+
+
+    <div class="pagination">
+
+      @if(members.currentPage > 1)
+        <a href="/members/?page={{members.currentPage-1}}">Previous page</a>
+      @endif
+
+      @each(anchor in members.getUrlsForRange(1, members.lastPage))
+        <a href="/members{{ anchor.url }}">  {{ anchor.page }}  </a>
       @endeach
-    </tbody>
-  </table>
+
+      @if(members.currentPage < members.lastPage)
+        <a href="/members/?page={{members.currentPage+1}}">Next page</a>
+      @endif
+
+    </div>
+
 </body>
 </html>

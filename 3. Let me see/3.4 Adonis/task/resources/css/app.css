@@ -149,3 +149,33 @@ form button {
 form button:hover {
   background-color: #0056b3;
 }
+
+/* ------------------------------------------------------------- */
+
+.pagination {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.pagination a {
+  display:inline;
+  text-align: center;
+  margin: 20px;
+  text-decoration: none;
+  color: #007bff;
+  padding: 10px 15px;
+  border: 1px solid #007bff;
+}
+
+.pagination a.active,
+.pagination a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination a.disabled {
+  pointer-events: none;
+  color: #ccc;
+  border-color: #ccc;
+}

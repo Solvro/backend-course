@@ -3,9 +3,12 @@ import { createClubMemberValidator } from '#validators/club_member'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ClubMembersController {
-    async index({view}: HttpContext) {
-        const members = await ClubMember.all()
-        return view.render('club_members/index', {members})
+    async index({request, view}: HttpContext) {
+        const members = await ClubMember.query().paginate(
+            request.input('page', 1),
+            request.input('perPage', 10)
+        )
+        return view.render('club_members/index', { members })
     }
 
     async showMember({request, view}: HttpContext) {
