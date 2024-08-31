@@ -1,0 +1,23 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "http",
+    "server",
+    "html",
+    "js",
+    "jokes"
+  ],
+  "author": "Jakub Czajkowski",
+  "license": "ISC",
+  "description": "Simple http server page.",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "one-liner-joke": "^1.2.2"
+  }
+}
