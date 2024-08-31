@@ -9,14 +9,14 @@ function getIndexPage(categories) {
         return `<li><a href="${category}">${category}</a></li>`
     })
 
-    page = page.replaceAll('[date]', `${date.toLocaleDateString('pl-PL')} ${date.toLocaleTimeString('pl-PL')}`);
-    page = page.replaceAll('[categories]', categoriesList.join('\n'))
+    page = page.replaceAll('{{date}}', `${date.toLocaleDateString('pl-PL')} ${date.toLocaleTimeString('pl-PL')}`);
+    page = page.replaceAll('{{categories}}', categoriesList.join('\n'))
     return page
 }
 
 function getJokePage(category) {
     let page = fs.readFileSync('./joke.html').toString()
-    page = page.replaceAll('[joke]', oneLinerJoke.getRandomJokeWithTag(category).body)
+    page = page.replaceAll('{{joke}}', oneLinerJoke.getRandomJokeWithTag(category).body)
     return page
 }
 
