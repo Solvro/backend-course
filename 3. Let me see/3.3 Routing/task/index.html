@@ -7,28 +7,6 @@
   </head>
   <body>
     <h1>Elo żelo {{dateNow}}</h1>
-    <div id="buttons"></div>
+    <div id="buttons">{{buttons}}</div>
   </body>
-  <script>
-    const div = document.getElementById("buttons");
-
-    const categories = [
-      "animal",
-      "car",
-      "men",
-      "women",
-      "life",
-      "sport",
-      "sarcastic",
-    ];
-
-    categories.forEach((category) => {
-      const button = document.createElement("button");
-      button.textContent = category;
-      button.addEventListener("click", () => {
-        window.location.href = `http://127.0.0.1:1234/categories/${category}`;
-      });
-      div.appendChild(button);
-    });
-  </script>
 </html>

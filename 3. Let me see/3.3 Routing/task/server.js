@@ -29,6 +29,23 @@ http
 function handleHomeView() {
   let view = fs.readFileSync("./index.html").toString();
   view = view.replaceAll("{{dateNow}}", new Date().toLocaleString("pl-PL"));
+
+  const categories = [
+    "animal",
+    "car",
+    "men",
+    "women",
+    "life",
+    "sport",
+    "sarcastic",
+  ];
+  const buttonsHtml = categories
+    .map((category) => {
+      return `<button onclick="window.location.href='http://localhost:1234/categories/${category}'">${category}</button>`;
+    })
+    .join("");
+  view = view.replaceAll("{{buttons}}", buttonsHtml);
+
   return view;
 }
 
