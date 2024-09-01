@@ -8,5 +8,8 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import Member from "#models/member";
 
-router.on('/').render('pages/home')
+router.on('/').render('members', {
+  members: await Member.all()
+})

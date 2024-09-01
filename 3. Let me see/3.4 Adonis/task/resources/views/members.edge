@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Members table</title>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body>
+        <table>
+          <tr>
+            <th>Index</th>
+            <th>First name</th>
+            <th>Last name</th>
+          </tr>
+          @each(member in members)
+          <tr>
+            <td>{{member.index}}</td>
+            <td>{{member.firstName}}</td>
+            <td>{{member.lastName}}</td>
+          </tr>
+          @endeach
+        </table>
+    </body>
+</html>
