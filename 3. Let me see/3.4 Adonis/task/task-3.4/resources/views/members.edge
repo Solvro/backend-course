@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Members table
+    </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  </head>
+  <body>
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Fisrt Name</th>
+            <th>Last Name</th>
+            
+        </tr>
+
+        @each(member in members)
+        <tr>
+           <td>{{member.index}}</td>
+           <td>{{member.firstName}}</td>
+           <td>{{member.lastName}}</td>
+           
+        </tr>
+        @endeach
+    </table>
+  </body>
+</html>
