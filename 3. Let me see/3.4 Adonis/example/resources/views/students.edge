@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Students table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    @!component('components/link', { text: 'Dodaj nowego studenta ->', link:'/create' })
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Szczegóły</th>
+        </tr>
+
+        @each(student in students)
+        <tr>
+            <td>{{student.index}}</td>
+            <td>{{student.firstName}}</td>
+            <td>{{student.lastName}}</td>
+            <td>
+                 @!component('components/link', { text: 'Szczegóły ->' , link:`/${student.index}` })
+            </td>
+        </tr>
+        @endeach
+
+    </table>
+    <hr />
+
+    @if(page>1)
+        @!component('components/link', { text: 'Poprzednia strona' , link:`?page=${page-1}` })
+    @endif
+
+    @if(students.length == 10)
+        @!component('components/link', { text: 'Następna strona' , link:`?page=${page+1}` })
+    @endif
+</body>
+
+</html>

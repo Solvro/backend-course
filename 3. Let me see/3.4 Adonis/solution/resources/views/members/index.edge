@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Members table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <a href="/members/create">Dodaj nowego członka</a>
+    @flashMessage('member-notification')
+    <p style="color: green"> {{ $message }}</p>
+    @end
+
+    @!component('components/table', {
+    data: members,
+    fields:[
+    'index',
+    'firstName',
+    'lastName',
+    ['Szczegóły', (member)=> `<a href='/members/${member.index}'>Szczegóły -></a>`]
+    ]})
+
+    <hr />
+
+    Strony:
+    @each(anchor in members.getUrlsForRange(1, members.lastPage))
+    <a href="/members{{ anchor.url }}">
+        {{ anchor.page }}
+    </a>
+    @endeach
+
+</body>
+
+</html>

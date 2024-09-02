@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Students table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    @!component('components/link', { text: '<- Powrót' , link:`/` })
+
+    @each(error in flashMessages.get('errors'))
+    <p style="color:red">{{error}}</p>
+    @endeach
+
+    <form action="/create" method="POST">
+        {{ csrfField() }}
+        <input type="number" placeholder="Index" name="index">
+        <input type="text" placeholder="Imię" name="firstName">
+        <input type="text" placeholder="Nazwisko" name="lastName">
+        <input type="date" name="dateOfBirth">
+        <button type="submit">Wyślij</button>
+    </form>
+</body>
+
+</html>
