@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Members table
+    </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  </head>
+  <body>
+    @if(!member)
+    <h1>No such member with index: {{index}}</h1>
+    @else
+    <h1>Details of member: {{member.index}}</h1>
+    <table class="striped">
+            <tr>
+                <th><b>Index</b></th>
+                <td>{{member.index}}</td>
+            </tr>
+            <tr>
+                <th><b>Fisrt Name</b></th>
+                <td>{{member.firstName}}</td>
+            </tr>
+            <tr>
+                <th><b>Last Name</b></th>
+                <td>{{member.lastName}}</td>
+            </tr>
+            <tr>
+                <th><b>Status</b></th>
+                <td>{{member.status}}</td>
+            </tr>
+            <tr>
+                <th><b>Email</b></th>
+                <td>{{member.email}}</td>
+            </tr>
+    </table> 
+    @end
+    
+  </body>
+</html>
