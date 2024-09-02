@@ -9,13 +9,28 @@
 
 import router from '@adonisjs/core/services/router'
 import Member from "#models/member";
+import {createMemberValidator} from "#validators/member";
 
-router.on('/').render('members', {
-  members: await Member.all()
+router.get('/', (async ({view}) => {
+  const members = await Member.all();
+  return view.render('members', {members})
+}))
+
+router.get('/create', async ({view}) => {
+  return view.render('member_create')
 })
 
-router.get('/:index', async ({ request, view }) => {
+router.post('/create', async ({request, response}) => {
+  const data = request.all()
+  const payload = await createMemberValidator.validate(data)
+  await Member.create(payload)
+  return response.redirect('/')
+})
+
+
+router.get('/:index', async ({request, view}) => {
   const index = request.param('index')
   const member = await Member.findByOrFail('index', index)
   return view.render('member_details', {member})
 })
+
