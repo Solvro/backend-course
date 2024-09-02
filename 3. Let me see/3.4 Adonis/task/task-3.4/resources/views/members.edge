@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> Members table </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <a href="/create">Dodaj nowego studenta</a>
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Szczegóły</th>
+        </tr>
+
+        @each(member in members)
+        <tr>
+           <td>{{member.index}}</td>
+           <td>{{member.name}}</td>
+           <td>{{member.surname}}</td>
+           <td><a href="/{{member.index}}">Szczegóły</a></td>
+        </tr>
+        @endeach
+    </table>
+    @if(page>1)
+        <a href="?page={{page-1}}">Poprzednia strona</a>
+    @endif
+
+    @if(members.length == 10)
+        <a href="?page={{page+1}}">Następna strona</a>
+    @endif
+</body>
+</html>

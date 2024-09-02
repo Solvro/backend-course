@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Students Table</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    @each(error in flashMessages.get('errors'))
+    <p style="color:red">{{error}}</p>
+    @endeach
+
+    <a href="/"><- Powrót</a>
+    <form action="/create" method="POST">
+        {{ csrfField() }} <!-- zabezpieczenie przed CSRF -->
+        <input type="number" name="index" placeholder="Index" required>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="surname" placeholder="Surname" required>
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="ACTIVE">Active</option>
+            <option value="NOT_ACTIVE">Not Active</option>
+            <option value="NEW">New</option>
+            <option value="HONORED">Honored</option>
+        </select>
+        <button type="submit">Wyślij</button>
+    </form>
+</body>
+</html>
