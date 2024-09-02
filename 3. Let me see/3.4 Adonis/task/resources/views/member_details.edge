@@ -7,7 +7,7 @@
         <title>Details for {{member.firstName}} {{member.lastName}}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body style="text-align: center">
         <h1>Details for member: {{member.firstName}} {{member.lastName}}</h1>
         <ul>
             <li>Index: {{member.index}}</li>
@@ -17,5 +17,7 @@
             <li>Created at: {{member.createdAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</li>
             <li>Updated at: {{member.updatedAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</li>
         </ul>
+        <br><br>
+        <h2><a href="/">Return</a></h2>
     </body>
 </html>
