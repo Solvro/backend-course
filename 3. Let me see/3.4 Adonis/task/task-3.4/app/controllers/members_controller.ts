@@ -4,10 +4,18 @@ import SolvroMember from '#models/solvro_member'
 import { Status } from '#models/solvro_member'
 
 export default class MembersController {
-  async index({ view }: HttpContext) {
-    const members = await SolvroMember.all()
+  async index({ request, view }: HttpContext) {
+    const page = Number(request.input('page', 1))
+    const perPage = Number(request.input('perPage', 5))
+
+    const members = await SolvroMember.query()
+      .limit(perPage)
+      .offset(perPage * (page - 1))
+
     return view.render('members', {
       members,
+      page,
+      perPage,
     })
   }
 

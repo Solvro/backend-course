@@ -30,5 +30,14 @@
         @endeach
       </tbody>
     </table>
+    <div>
+      @if(page>1)
+        <a href="?page={{page-1}}&perPage={{perPage}}">Poprzednia strona</a>
+      @endif
+
+    @if(members.length == perPage)
+        <a href="?page={{page+1}}&perPage={{perPage}}">Następna strona</a>
+    @endif
+    </div>
   </body>
 </html>
