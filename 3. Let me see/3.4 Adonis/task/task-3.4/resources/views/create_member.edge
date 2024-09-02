@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Students table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <a href="/"><- Go back</a>
+    @each(error in flashMessages.get('errors'))
+        <p><mark style="color: rgb(172, 0, 0); background-color: rgb(237, 172, 172);">{{error}}</mark></p>
+    @endeach
+
+    <form action="/create" method="POST">
+       {{ csrfField() }}
+       <label>
+            Index
+            <input type="number" name="index" value="{{old('index')}}">
+        </label>
+        
+        <label>
+            First name
+            <input type="text" name="firstName" value="{{old('firstName') || ''}}">
+        </label>
+        
+        <label>
+            Last name
+            <input type="text" name="lastName" value="{{old('lastName') || ''}}">
+        </label>
+        
+        <label>
+            Status
+            <select name="status">
+                <option value="">---</option>
+                @each(key in Object.keys(status))
+                    <option value="{{ status[key] }}">{{ status[key] }}</option>
+                @end
+            </select>
+        </label>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

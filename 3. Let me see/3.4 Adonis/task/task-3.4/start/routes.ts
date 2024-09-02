@@ -8,14 +8,13 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import SolvroMember from '#models/solvro_member'
+import MembersController from '#controllers/members_controller'
 
-router.on('/').render('members', {
-  members: await SolvroMember.all(),
-})
+router.get('/', [MembersController, 'index'])
+router.get('create', [MembersController, 'create'])
 
-router.get('/:index', async ({ request, view }) => {
-  const index = request.param('index')
-  const member = await SolvroMember.find(index)
-  return view.render('member_details', { member, index })
+router.post('create', [MembersController, 'store'])
+
+router.get('/:index', [MembersController, 'show']).where('index', {
+  match: /^[0-9]+$/,
 })
