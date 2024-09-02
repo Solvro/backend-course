@@ -16,7 +16,6 @@
     @each(error in flashMessages.get('errors'))
         <p><mark style="color: rgb(172, 0, 0); background-color: rgb(237, 172, 172);">{{error}}</mark></p>
     @endeach
-
     <form action="/create" method="POST">
        {{ csrfField() }}
        <label>
