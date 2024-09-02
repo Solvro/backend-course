@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .student-details {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .student-details h1 {
+      margin-bottom: 20px;
+    }
+    .student-details p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="student-details">
+    <h1>Student Details</h1>
+    <p><strong>Index:</strong> {{ student.id }}</p>
+    <p><strong>First Name:</strong> {{ student.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ student.lastName }}</p>
+    <p><strong>Status:</strong> {{ student.status }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+  </div>
+
+</body>
+</html>

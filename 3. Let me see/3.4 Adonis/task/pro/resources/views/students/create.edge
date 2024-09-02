@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Student</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-container h1 {
+      margin-bottom: 20px;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .form-container input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    .form-container input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>Create New Student</h1>
+    @if(session.has('errors'))
+      <div class="error">
+        @each(error in session.get('errors').messages)
+          <p>{{ error }}</p>
+        @endeach
+      </div>
+    @endif
+    <form action="/students" method="POST">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required>
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required>
+
+      <label for="status">Status:</label>
+      <input type="text" id="status" name="status" required>
+
+      <input type="submit" value="Create Student">
+    </form>
+  </div>
+
+</body>
+</html>
