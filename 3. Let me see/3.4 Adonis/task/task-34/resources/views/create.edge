@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Members table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+    <a href="/"><- Powrót</a>
+    @each(error in flashMessages.get('errors'))
+    <p style="color:red">{{error}}</p>
+  @endeach
+
+    <form action="/create" method="POST">
+       {{ csrfField() }}
+        <input type="number" name="index" placeholder="Index" value="{{old("index") || ""}}">
+        <input type="text" name="firstName" placeholder="Imie" value="{{old("firstName") || ""}}">
+        <input type="text" name="lastName" placeholder="Nazwisko" value="{{old("lastName") || ""}}">
+        <p>Wybierz status czlonka kola Solvro:</p>
+        <input type="radio" id="active" name="status" value="active">
+        <label label for="active">active</label><br>
+        <input type="radio" id="inactive" name="status" value="inactive">
+        <label for="inactive">inactive</label><br>
+        <input type="radio" id="honor" name="status" value="honor">
+        <label for="honor">honor</label>
+        <input type="radio" id="begineer" name="status" value="begineer">
+        <label for="begineer">begineer</label>
+        <button type="submit">Wyślij</button>
+    </form>
+</body></html>
