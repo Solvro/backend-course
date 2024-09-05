@@ -36,3 +36,8 @@ table th {
 tr:nth-of-type(odd) {
   background-color: #f5f5f5;
 }
+h4 {
+  font-weight: 400;
+  font-size: 14px;
+  color: #404040;
+}
