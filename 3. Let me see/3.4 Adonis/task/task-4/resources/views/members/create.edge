@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabela członków</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <a href="/members"><-Powrót</a>
+        @each(error in flashMessages.get('errors'))
+            <p>{{error}}</p>        
+        @end
+        <form action="/members/create" method="POST">
+            {{csrfField()}}
+            <input type="number" value="{{old('index') || ''}}" placeholder="index" name="index">
+            <input type="text" placeholder="imię" name="FirstName" value="{{old('firstName') || ''}}">
+            <input type="text" placeholder="nazwisko" name="LastName" value="{{old('lastName') || ''}}">
+            <select name="status" value="{{old('lastName')||''}}">
+                {{-- 'active','graduate','inactive' --}}
+                <option value="active" {{old('lastName')=='active'? 'selected': ''}}>
+                    active
+                </option>
+                <option value="graduate" {{old('lastName')=='graduate'?'selected':''}}>
+                    graduate
+                </option>
+                <option value="inactive" {{old('lastName')=='inactive' ? 'selected': ''}}>
+                    inactive
+                </option>
+            </select> <button type="submit">WYślij</button>
+        </form>
+</body>
+</html>
