@@ -5,10 +5,10 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class MembersController {
     async index({ view, request} : HttpContext) {
         const page = Number(request.input('page', 1))
-        const limit = 10
+        const perPage = Number(request.input('perPage', 10))
         const members = await Member.query()
-            .limit(limit)
-            .offset(limit * (page - 1))
+            .limit(perPage)
+            .offset(perPage * (page - 1))
         return view.render('members', {members, page})
     }
 

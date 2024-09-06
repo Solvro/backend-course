@@ -27,5 +27,12 @@
         </tr>
         @endeach
     </table>
+    @if(page>1)
+      <a href='?page={{page-1}}'>last page</a>
+    @endif
+
+    @if(members.length == 10)
+      <a href='?page={{page+1}}'>Next page</a>
+    @endif
   </body>
 </html>
