@@ -7,29 +7,14 @@
 |
 */
 
-import Member from '#models/member'
-import { createMemberValidator } from '#validators/student'
 import router from '@adonisjs/core/services/router'
 
-router.get('/', async ({ view }) => {
-  return view.render('members', {
-    members: await Member.all(),
-  })
-})
+const MembersController = () => import('#controllers/members_controller')
 
-router.get('create', ({ view }) => view.render('create'))
-router.post('create', async ({ request, response }) => {
-  const data = request.all()
-  const payload = await createMemberValidator.validate(data)
-  await Member.create({
-    ...payload,
-  })
+router.get('/', [MembersController, 'index'])
 
-  return response.redirect().toRoute('/')
-})
+router.get('create', [MembersController, 'create'])
 
-router.get('/:index', async ({ request, view }) => {
-  const index = request.param('index')
-  const member = await Member.findByOrFail('index', index)
-  return view.render('member', { member })
-})
+router.post('create', [MembersController, 'store'])
+
+router.get('/:index', [MembersController, 'show'])
