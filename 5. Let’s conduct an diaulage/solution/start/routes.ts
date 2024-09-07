@@ -10,7 +10,7 @@
 import MembersController from '#controllers/members_controller'
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-
+const AuthController = () => import('#controllers/auth_controller')
 router
   .group(() => {
     router
@@ -19,6 +19,8 @@ router
       .params({
         members: 'index',
       })
-      .use(['store', 'update', 'destroy'], middleware.eloZeloAuth())
+      .use(['update', 'destroy'], middleware.auth())
+
+    router.post('login', [AuthController, 'login'])
   })
   .prefix('api/v1')

@@ -9,6 +9,7 @@ export const createMemberValidator = vine.compile(
     firstName: vine.string().maxLength(255),
     lastName: vine.string().maxLength(255),
     status: vine.enum(['implementation', 'active', 'alumni', 'inactive']),
+    password:vine.string().minLength(8)
   })
 )
 

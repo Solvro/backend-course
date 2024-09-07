@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.enum('status', ['implementation', 'active', 'alumni', 'inactive'], {
         useNative: true,
         enumName: 'member_status',
-        existingType: false,
+        existingType: true,
       })
 
       table.timestamps(true)
