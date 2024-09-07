@@ -1,5 +1,7 @@
 import Member from '#models/member'
+import MemberAggregationService from '#services/member_aggregation_service'
 import { createMemberValidator, updateMemberValidator } from '#validators/member'
+import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import drive from '@adonisjs/drive/services/main'
 
@@ -7,8 +9,9 @@ export default class MembersController {
   /**
    * Display a list of resource
    */
-  async index({ request }: HttpContext) {
-    return Member.query().paginate(request.input('page', 1), request.input('perPage', 10))
+  @inject()
+  async index({ request }: HttpContext, memberAggregationService: MemberAggregationService) {
+    return await memberAggregationService.byStatusAndIndexRange()
   }
 
   /**

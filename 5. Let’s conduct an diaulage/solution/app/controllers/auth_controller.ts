@@ -1,6 +1,5 @@
 import Member from '#models/member'
 import type { HttpContext } from '@adonisjs/core/http'
-import hash from '@adonisjs/core/services/hash'
 
 export default class AuthController {
   async login({ request, auth }: HttpContext) {
