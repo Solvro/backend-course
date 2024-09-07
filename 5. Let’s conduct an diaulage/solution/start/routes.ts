@@ -10,6 +10,7 @@
 import MembersController from '#controllers/members_controller'
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import { throttleAuth } from './limiter.js'
 const AuthController = () => import('#controllers/auth_controller')
 router
   .group(() => {
@@ -20,7 +21,8 @@ router
         members: 'index',
       })
       .use(['update', 'destroy'], middleware.auth())
+      .use(['store'], throttleAuth)
 
-    router.post('login', [AuthController, 'login'])
+    router.post('login', [AuthController, 'login']).use(throttleAuth)
   })
   .prefix('api/v1')
