@@ -1,7 +1,7 @@
 import Member from '#models/member'
 import { createMemberValidator, updateMemberValidator } from '#validators/member'
 import type { HttpContext } from '@adonisjs/core/http'
-import hash from '@adonisjs/core/services/hash'
+import drive from '@adonisjs/drive/services/main'
 
 export default class MembersController {
   /**
@@ -33,6 +33,17 @@ export default class MembersController {
   async update({ params, request }: HttpContext) {
     const data = await updateMemberValidator.validate(request.all())
     const member = await Member.findOrFail(params.index)
+    const image = request.file('photo', {
+      size: '10mb',
+      extnames: ['jpeg', 'jpg', 'png'],
+    })
+
+    if (image) {
+      const path = `members/${member.index}.${image.extname}`
+      await image.moveToDisk(path)
+      member.merge({ photo: await drive.use().getUrl(path) })
+    }
+
     member.merge(data)
     member.save()
 

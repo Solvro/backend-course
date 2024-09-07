@@ -40,14 +40,4 @@ export default class Member extends compose(BaseModel, AuthFinder) {
     serialize: (value) => value.toFormat('yyyy-LL-dd HH:mm:ss'),
   })
   declare updatedAt: DateTime
-
-  // /**
-  //  * Runs before creating and updating the model
-  //  */
-  // @beforeSave()
-  // static async hashPassword(member: Member) {
-  //   if (member.$dirty.password) {
-  //     member.password = await hash.make(member.password)
-  //   }
-  // }
 }
