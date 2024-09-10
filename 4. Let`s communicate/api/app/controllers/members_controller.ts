@@ -6,8 +6,11 @@ export default class MembersController {
   /**
    *@description Display a list of resource
    */
-  async index({}: HttpContext) {
-    const members = await SolvroMember.all()
+  async index({ request }: HttpContext) {
+    const page = Number(request.input('page', 1))
+    const perPage = Number(request.input('perPage', 5))
+
+    const members = await SolvroMember.query().paginate(page, perPage)
     return members
   }
 
