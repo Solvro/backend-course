@@ -12,3 +12,11 @@ export const createMemberValidator = vine.compile(
     status: vine.enum(['onboarding', 'active', 'honorary', 'inactive'])
   })
 )
+
+export const updateMemberValidator = vine.compile(
+  vine.object({
+    firstName: vine.string().maxLength(255),
+    lastName: vine.string().maxLength(255),
+    status: vine.enum(['onboarding', 'active', 'honorary', 'inactive'])
+  })
+)
