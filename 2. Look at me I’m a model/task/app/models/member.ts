@@ -1,18 +1,27 @@
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import MemberCourse from './member_course.js'
+import MemberDepartment from './member_department.js'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Member extends BaseModel {
     @column({ isPrimary: true })
     declare id: number
 
-    @column({})
+    @column()
     declare index: string
 
-    @column({})
+    @column()
     declare first_name: string
 
-    @column({})
+    @column()
     declare last_name: string
 
-    @column({})
+    @column()
     declare status: string
+
+    @hasMany(() => MemberCourse)
+    declare courses: HasMany<typeof MemberCourse>
+ 
+    @hasMany(() => MemberDepartment)
+    declare departments: HasMany<typeof MemberDepartment>
 }
