@@ -27,8 +27,8 @@ export default class SolvroMember extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  // @computed()
-  // get email() {
-  //   return `${this.index}@student.pwr.edu.pl`
-  // }
+  @computed()
+  get email() {
+    return `${this.index}@student.pwr.edu.pl`
+  }
 }

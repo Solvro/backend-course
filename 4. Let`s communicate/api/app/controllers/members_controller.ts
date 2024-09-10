@@ -10,7 +10,9 @@ export default class MembersController {
     const page = Number(request.input('page', 1))
     const perPage = Number(request.input('perPage', 5))
 
-    const members = await SolvroMember.query().paginate(page, perPage)
+    const members = (await SolvroMember.query().paginate(page, perPage)).serialize({
+      fields: { omit: ['createdAt', 'updatedAt'] },
+    })
     return members
   }
 
