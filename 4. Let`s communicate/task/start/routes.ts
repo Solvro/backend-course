@@ -7,10 +7,14 @@
 |
 */
 
+import ClubMembersController from '#controllers/club_members_controller'
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+
+router.group(() => {
+    router.resource('members', ClubMembersController)
+      .apiOnly()
+      .params({members: 'index'})
+      .use(['show', 'update', 'destroy'], middleware.validateIndex())
+}).prefix('api/v1')
