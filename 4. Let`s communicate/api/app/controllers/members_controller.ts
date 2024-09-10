@@ -4,7 +4,7 @@ import { createMemberValidator, updateMemberValidator } from '#validators/member
 
 export default class MembersController {
   /**
-   * Display a list of resource
+   *@description Display a list of resource
    */
   async index({}: HttpContext) {
     const members = await SolvroMember.all()
