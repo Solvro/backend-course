@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      AdonisJS - A fully featured web framework for Node.js
+    </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  </head>
+  <body>
+    <h1>
+      It Works!
+    </h1>
+
+    <a href="/members/create">Crete a member</a>
+
+    <table>
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Index</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(member in members)
+            <tr>
+            <td>{{ member.id }}</td>
+            <td><a href="/members/{{ member.index }}">{{ member.index }}</a></td>
+            <td>{{ member.first_name }}</td>
+            <td>{{ member.last_name }}</td>
+            <td>{{ member.status }}</td>
+            </tr>
+            @endeach
+        </tbody>
+    </table>
+  </body>
+</html>
