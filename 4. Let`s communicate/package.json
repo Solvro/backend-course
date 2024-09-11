@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "adonis-autoswagger": "^3.63.0"
+  }
+}
