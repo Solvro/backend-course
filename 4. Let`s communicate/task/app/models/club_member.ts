@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
 
 export default class ClubMember extends BaseModel {
   @column({ isPrimary: true })
@@ -14,9 +14,21 @@ export default class ClubMember extends BaseModel {
   @column()
   declare status: 'Active' | 'Inactive' | 'Trainee' | 'Honorary'
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ 
+      autoCreate: true,
+      serialize: (value) => value.toFormat('yyyy-LL-dd HH:mm:ss')
+  })
   declare createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ 
+      autoCreate: true, 
+      autoUpdate: true,
+      serialize: (value) => value.toFormat('yyyy-LL-dd HH:mm:ss')
+  })
   declare updatedAt: DateTime
+
+  @computed()
+  get email() {
+      return `${this.index}@student.pwr.edu.pl`
+  }
 }
