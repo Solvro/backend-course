@@ -1,0 +1,38 @@
+import Member from '#models/member'
+import { createMemberUpdateValidator, createMemberValidator } from '#validators/member'
+import type { HttpContext } from '@adonisjs/core/http'
+
+export default class MembersController {
+  async index({ request }: HttpContext) {
+    const page = Number(request.input('page', 1))
+    const perPage = Number(request.input('perPage', 10))
+    const members = await Member.query().paginate(page, perPage)
+    
+    return members
+  }
+
+  async store({ request }: HttpContext) {
+    const data = await createMemberValidator.validate(request.all())
+    const member = await Member.create(data)
+    return member
+  }
+
+  async show({ params }: HttpContext) {
+    return Member.findByOrFail(params.index)
+  }
+
+  async update({ params, request }: HttpContext) {
+    const data = await createMemberUpdateValidator.validate(request.all())
+    const member = await Member.findByOrFail(params.id)
+    member.merge(data)
+    member.save()
+
+    return member
+  }
+
+  async destroy({ params }: HttpContext) {
+      const member = await Member.findByOrFail(params.id)
+      await member.delete()
+      return {message: 'Member deleted'}
+    }
+}
