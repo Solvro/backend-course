@@ -19,4 +19,8 @@ export default class Member extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  serializeExtras() {
+    return {'email': `${this.index}@student.pwr.edu.pl`}
+  }
 }
