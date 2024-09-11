@@ -8,7 +8,7 @@ export default class MembersController {
     const page = Number(request.input('page', 1))
     const perPage = Number(request.input('perPage', 10))
     const filter = request.input('filter', '')
-    const sortBy = request.input('sortBy', 'id')
+    const sortBy = request.input('sortBy', 'index')
     const order = request.input('order', 'asc')
     
     const query = Member.query()
