@@ -19,7 +19,7 @@ export default class ClubMembersController {
     }
 
     async update({params, request}: HttpContext) {
-        const inputData = await createClubMemberValidator(params.index).validate(request.all())
+        const inputData = await createClubMemberValidator(Number(params.index)).validate(request.all())
         const member = await ClubMember.findOrFail(params.index)
         member.merge(inputData).save()
         return { message: 'Member updated successfully', member}
