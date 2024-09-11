@@ -39,5 +39,6 @@ router.use([() => import('@adonisjs/core/bodyparser_middleware'), () => import('
  * the routes or the routes group.
  */
 export const middleware = router.named({
+  eloZeloHeaderAuth: () => import('#middleware/elo_zelo_header_auth_middleware'),
   validateIndex: () => import('#middleware/validate_index_middleware')
 })
