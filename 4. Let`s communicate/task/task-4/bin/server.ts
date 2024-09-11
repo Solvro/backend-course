@@ -11,12 +11,17 @@
 
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
+import { fileURLToPath } from 'node:url'
+import { readFileSync } from 'node:fs'
+import { createServer } from 'node:https'
 
 /**
  * URL to the application root. AdonisJS need it to resolve
  * paths to file and directories for scaffolding commands
  */
 const APP_ROOT = new URL('../', import.meta.url)
+
+const sslPath = (name: string) => fileURLToPath(new URL(`ssh/${name}`, APP_ROOT))
 
 /**
  * The importer is used to import files in context of the
@@ -38,7 +43,15 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     app.listenIf(app.managedByPm2, 'SIGINT', () => app.terminate())
   })
   .httpServer()
-  .start()
+  .start((handle) => {
+    return createServer(
+      {
+        key: readFileSync(sslPath('key.pem'), 'utf-8'),
+        cert: readFileSync(sslPath('cert.pem'), 'utf-8'),
+      },
+      handle
+    )
+  })
   .catch((error) => {
     process.exitCode = 1
     prettyPrintError(error)
