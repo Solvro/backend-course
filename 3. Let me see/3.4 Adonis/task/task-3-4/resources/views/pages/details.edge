@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Students table
+    </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  </head>
+
+  <body>
+    <h1>
+      {{ member.firstName }} {{ member.lastName }}
+    </h1>
+    <h3>
+      Status: {{ member.status }}
+    </h3>
+    <p>
+      Email: {{ email }}
+    </p>
+  </body>
+</html>

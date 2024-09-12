@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Students table
+    </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  </head>
+
+  <body>
+    <table>
+      <tr>
+        <th>
+          Id
+        </th>
+        <th>
+          First Name
+        </th>
+        <th>
+          Last Name
+        </th>
+      </tr>
+
+      @each(member in members)
+        <tr>
+          <td>
+            {{ member.id }}
+          </td>
+          <td>
+            {{ member.firstName }}
+          </td>
+          <td>
+            {{ member.lastName }}
+          </td>
+        </tr>
+      @endeach
+    </table>
+  </body>
+</html>
