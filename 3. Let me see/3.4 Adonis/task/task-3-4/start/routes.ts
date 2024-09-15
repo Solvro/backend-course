@@ -18,7 +18,11 @@ router.get('/', async ({ view }) => {
 
 router.get('/:id', async ({ request, view }) => {
   const id = request.param('id')
-  const member = await Member.findByOrFail('id', id)
-  const email = `${member.firstName.toLowerCase()}.${member.lastName.toLowerCase()}@solvro.pl`
-  return view.render('pages/details', { member: member, email: email })
+  try {
+    const member = await Member.findByOrFail('id', id)
+    const email = `${member.firstName.toLowerCase()}.${member.lastName.toLowerCase()}@solvro.pl`
+    return view.render('pages/details', { member: member, email: email })
+  } catch (err) {
+    return view.render('pages/errors/not_found', { memberId: id })
+  }
 })
