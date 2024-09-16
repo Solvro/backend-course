@@ -30,7 +30,7 @@ export default class MembersController {
   }
 
   async update({ bouncer, params, request, response }: HttpContext) {
-    if (!(await bouncer.allows(editMember, params.index))) {
+    if (await bouncer.denies(editMember, params.index)) {
       return response.forbidden('You cannot edit other members')
     }
 
@@ -52,7 +52,7 @@ export default class MembersController {
    * Delete record
    */
   async destroy({ bouncer, params, response }: HttpContext) {
-    if (!(await bouncer.allows(deleteMember, params.index))) {
+    if (await bouncer.denies(deleteMember, params.index)) {
       return response.forbidden('You cannot delete other members')
     }
     const member = await SolvroMember.find(params.index)

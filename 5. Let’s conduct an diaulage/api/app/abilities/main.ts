@@ -19,10 +19,10 @@ import { Bouncer } from '@adonisjs/bouncer'
  * Delete the following ability to start from
  * scratch
  */
-export const editMember = Bouncer.ability((currentMember: SolvroMember, toEditId: Number) => {
-  return currentMember.index === toEditId
+export const editMember = Bouncer.ability((currentMember: SolvroMember, toEditId: string) => {
+  return currentMember.index === Number(toEditId)
 })
 
-export const deleteMember = Bouncer.ability((currentMember: SolvroMember, toEditId: Number) => {
-  return currentMember.index === toEditId
+export const deleteMember = Bouncer.ability((currentMember: SolvroMember, toDeleteId: string) => {
+  return currentMember.index === Number(toDeleteId)
 })

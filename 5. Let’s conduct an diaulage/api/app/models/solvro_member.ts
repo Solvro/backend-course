@@ -32,6 +32,9 @@ export default class SolvroMember extends compose(BaseModel, AuthFinder) {
   @column()
   declare status: Status | null
 
+  @column()
+  declare profilePhoto: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
