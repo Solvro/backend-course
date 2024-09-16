@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import SolvroMember from '#models/solvro_member'
+import { editMember, deleteMember } from '#abilities/main'
 import { createMemberValidator, updateMemberValidator } from '#validators/member'
 
 export default class MembersController {
@@ -28,7 +29,11 @@ export default class MembersController {
     return member
   }
 
-  async update({ params, request, response }: HttpContext) {
+  async update({ bouncer, params, request, response }: HttpContext) {
+    if (!(await bouncer.allows(editMember, params.index))) {
+      return response.forbidden('You cannot edit other members')
+    }
+
     const member = await SolvroMember.find(params.index)
     if (!member) {
       response.status(404)
@@ -46,7 +51,10 @@ export default class MembersController {
   /**
    * Delete record
    */
-  async destroy({ params, response }: HttpContext) {
+  async destroy({ bouncer, params, response }: HttpContext) {
+    if (!(await bouncer.allows(deleteMember, params.index))) {
+      return response.forbidden('You cannot delete other members')
+    }
     const member = await SolvroMember.find(params.index)
     if (!member) {
       response.status(404)
