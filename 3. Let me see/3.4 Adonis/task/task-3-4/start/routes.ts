@@ -20,14 +20,14 @@ router.get('/new', ({ view }) => {
   return view.render('pages/add_member')
 })
 
-router.post('/new', async ({ request, response }) => {
+router.post('/new', async ({ request, view }) => {
   await Member.create({
     firstName: request.input('firstName'),
     lastName: request.input('lastName'),
     status: request.input('status'),
   })
 
-  return response.redirect().toRoute('/')
+  return view.render('pages/add_member_success')
 })
 
 router.get('/:id', async ({ request, view }) => {
@@ -37,6 +37,6 @@ router.get('/:id', async ({ request, view }) => {
     const email = `${member.firstName.toLowerCase()}.${member.lastName.toLowerCase()}@solvro.pl`
     return view.render('pages/details', { member: member, email: email })
   } catch (err) {
-    return view.render('pages/errors/not_found', { memberId: id })
+    return view.render('pages/errors/not_found')
   }
 })
