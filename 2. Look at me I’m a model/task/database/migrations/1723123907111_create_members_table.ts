@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.enum('status', ['implementation', 'active', 'alumni', 'inactive'], { 
         useNative: true, // additional options only for postgresql, not required
         enumName: 'member_status',
-        existingType: true, // should be dynamic or solved other way
+        existingType: false,
       })
       table.timestamp('created_at').defaultTo('NOW()')
       table.timestamp('updated_at')
