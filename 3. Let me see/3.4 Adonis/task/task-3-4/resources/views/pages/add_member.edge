@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Students table
+    </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  </head>
+
+  <body>
+    <form action="/new" method="POST">
+      {{ csrfField() }}
+      <label for="firstName">First name:</label>
+      <input type="text" id="firstName" name="firstName" />
+
+      <label for="lastName">Last name:</label>
+      <input type="text" id="lastName" name="lastName" />
+
+      <label for="status">Status:</label>
+      <select name="status" id="status">
+        <option value="BREAK-IN">
+          Break-In
+        </option>
+        <option value="ACTIVE">
+          Active
+        </option>
+        <option value="NON-ACTIVE">
+          Non-Active
+        </option>
+        <option value="HONORARY">
+          Honorary
+        </option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+    <button onclick="location.href='/'">Back</button>
+  </body>
+</html>

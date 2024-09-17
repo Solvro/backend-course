@@ -16,6 +16,20 @@ router.get('/', async ({ view }) => {
   })
 })
 
+router.get('/new', ({ view }) => {
+  return view.render('pages/add_member')
+})
+
+router.post('/new', async ({ request, response }) => {
+  await Member.create({
+    firstName: request.input('firstName'),
+    lastName: request.input('lastName'),
+    status: request.input('status'),
+  })
+
+  return response.redirect().toRoute('/')
+})
+
 router.get('/:id', async ({ request, view }) => {
   const id = request.param('id')
   try {
