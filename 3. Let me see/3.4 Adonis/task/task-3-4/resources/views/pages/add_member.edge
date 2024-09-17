@@ -10,16 +10,21 @@
   </head>
 
   <body>
+    @each(error in flashMessages.get('errors'))
+      <p style="color:red">
+        {{ error }}
+      </p>
+    @endeach
+    
     <form action="/new" method="POST">
       {{ csrfField() }}
       <label for="firstName">First name:</label>
-      <input type="text" id="firstName" name="firstName" />
-
+      <input type="text" id="firstName" name="firstName" value="{{ old('firstName') || '' }}" />
       <label for="lastName">Last name:</label>
-      <input type="text" id="lastName" name="lastName" />
+      <input type="text" id="lastName" name="lastName" value="{{ old('lastName') ||'' }}" />
 
       <label for="status">Status:</label>
-      <select name="status" id="status">
+      <select name="status" id="status" value="{{ old('status') }}">
         <option value="BREAK-IN">
           Break-In
         </option>
