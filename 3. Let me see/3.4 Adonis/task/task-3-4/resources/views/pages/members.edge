@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <title>
-      Students table
+      Members
     </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
@@ -34,8 +34,12 @@
           <td>
             {{ member.lastName }}
           </td>
+          <td>
+            <button onclick="location.href='{{ member.id }}'">Details</button>
+          </td>
         </tr>
       @endeach
     </table>
+    <button onclick="location.href='/new'">New</button>
   </body>
 </html>
