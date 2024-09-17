@@ -9,6 +9,7 @@ export const MemberFactory = factory
       index: currentIndex++,
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      status: faker.helpers.arrayElement(['onboarding', 'active', 'honorary', 'inactive'] as const)
+      status: faker.helpers.arrayElement(['onboarding', 'active', 'honorary', 'inactive'] as const),
+      password: "password"
     }
   }).build()
