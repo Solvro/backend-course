@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "one-liner-joke": "^1.2.2"
+  }
+}
