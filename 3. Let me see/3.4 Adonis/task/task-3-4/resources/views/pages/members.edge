@@ -35,11 +35,18 @@
             {{ member.lastName }}
           </td>
           <td>
-            <button onclick="location.href='{{ member.id }}'">Details</button>
+            <button onclick="location.href='{{ member.id }}?page={{ page }}'">Details</button>
           </td>
         </tr>
       @endeach
     </table>
+    @if(members.length == 10)
+      <button onclick='location.href="?page={{ page+1 }}"'>Next page</button>
+    @endif
+    
+    @if(page>1)
+      <button onclick="location.href='?page={{ page-1 }}'">Previous page</button>
+    @endif
     <button onclick="location.href='/new'">New</button>
   </body>
 </html>
