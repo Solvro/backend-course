@@ -1,0 +1,34 @@
+<table>
+  <tr>
+    @each(field in fields)
+      @if(rows[0][field])
+        <th>
+          {{ field }}
+        </th>
+      @endif
+    @endeach
+  </tr>
+
+  @each(row in rows)
+    <tr>
+      @each(field in fields)
+        @if(row[field])
+          <td>
+            {{ row[field] }}
+          </td>
+        @endif
+      @endeach
+      {{--  havent figured how to add that dynamically yet  --}}
+      <td>
+        <button onclick="location.href='{{ row.id }}?page={{ page }}'">Details</button>
+      </td>
+    </tr>
+  @endeach
+</table>
+@if(rows.length == 10)
+  <button onclick='location.href="?page={{ page+1 }}"'>Next page</button>
+@endif
+  
+@if(page>1)
+  <button onclick="location.href='?page={{ page-1 }}'">Previous page</button>
+@endif

@@ -10,43 +10,12 @@
   </head>
 
   <body>
-    <table>
-      <tr>
-        <th>
-          Id
-        </th>
-        <th>
-          First Name
-        </th>
-        <th>
-          Last Name
-        </th>
-      </tr>
-
-      @each(member in members)
-        <tr>
-          <td>
-            {{ member.id }}
-          </td>
-          <td>
-            {{ member.firstName }}
-          </td>
-          <td>
-            {{ member.lastName }}
-          </td>
-          <td>
-            <button onclick="location.href='{{ member.id }}?page={{ page }}'">Details</button>
-          </td>
-        </tr>
-      @endeach
-    </table>
-    @if(members.length == 10)
-      <button onclick='location.href="?page={{ page+1 }}"'>Next page</button>
-    @endif
-    
-    @if(page>1)
-      <button onclick="location.href='?page={{ page-1 }}'">Previous page</button>
-    @endif
+    @!component('components/table', {
+      rows: members,
+      page: page,
+      fields: ['id', 'firstName', 'lastName', 'nic'],
+      customFields: customFields
+    })
     <button onclick="location.href='/new'">New</button>
   </body>
 </html>
