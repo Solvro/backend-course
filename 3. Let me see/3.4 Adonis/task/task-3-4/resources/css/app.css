@@ -1,19 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
-
-/* generated with gpt, just saying */
+/* generated with gpt lmao */
 /* general styles */
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  margin: 10px;
   padding: 20px;
   background-color: #f4f4f4;
 }
@@ -32,7 +21,7 @@ table {
 
 th,
 td {
-  padding: 10px;
+  padding: 3px;
   text-align: left;
   border: 1px solid #ddd;
 }
