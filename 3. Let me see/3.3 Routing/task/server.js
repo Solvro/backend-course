@@ -1,77 +1,49 @@
-const http = require("http");
-const { format } = require("date-fns");
-const { pl } = require("date-fns/locale");
-const { getRandomJokeWithTag } = require("one-liner-joke");
+import http from "http";
+import fs from "fs";
+import oneLinerJoke from "one-liner-joke";
 
 const PORT = 1234;
 
-const requestHandler = (req, res) => {
-  const now = new Date();
-  const formattedDate = format(now, "dd-MM-yyyy HH:mm", { locale: pl });
-  const url = req.url || "";
+function handleJokeView(category) {
+  let view = fs.readFileSync("./joke.html").toString();
+  view = view.replaceAll(
+    "{{joke}}",
+    oneLinerJoke.getRandomJokeWithTag(category.slice(1)).body
+  );
+  return view;
+}
 
-  const categories = [
-    "animal",
-    "car",
-    "men",
-    "women",
-    "life",
-    "sport",
-    "sarcastic",
-  ];
+function handleDefaultView(categories) {
+  let view = fs.readFileSync("./index.html").toString();
+  const date = new Date();
+  const categoriesList = categories.map(
+    (category) =>
+      `<li><a href="${category}">${category}</a></li>
+        `
+  );
 
-  if (url === "/") {
-    const responseContent = `
-    <!DOCTYPE html>
-    <html lang="pl">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Elo Żelo</title>
-    </head>
-    <body>
-      <h1>Elo Żelo</h1>
-      <p>${formattedDate}</p>
-      <p>Kategorie żartow:</p>
-      <ul>
-        ${categories.map(
-          (category) =>
-            `<li><a href="/${category}">${category}</a></li>`
-        ).join('')}
-      </ul>
-    </body>
-    </html>
-  `;
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.end(responseContent);
-  } else if (categories.includes(url.slice(1))) {
-    // Strona z żartem na podstawie kategorii
-    const category = url.slice(1);
-    const joke = getRandomJokeWithTag(category).body;
-    const responseContent = `
-      <!DOCTYPE html>
-      <html lang="pl">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Żart z kategorii ${category}</title>
-      </head>
-      <body>
-        <h1>Żart z kategorii ${category}</h1>
-        <p>${joke}</p>
-        <p><a href="/">Wróć do strony głównej</a></p>
-      </body>
-      </html>
-    `;
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.end(responseContent);
-  }else{
-    res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-    res.end('404 error');
-  }
-};
-const server = http.createServer(requestHandler);
+  view = view.replaceAll("{{date}}", date.toLocaleDateString("pl-PL"));
+  view = view.replaceAll("{{categories}}", categoriesList.join(""));
+  return view;
+}
 
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+http
+  .createServer((request, response) => {
+    const categories = [
+      "/animal",
+      "/car",
+      "/men",
+      "/women",
+      "/life",
+      "/sport",
+      "/sarcastic",
+    ];
+    response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    if (categories.includes(request.url)) {
+      response.write(handleJokeView(request.url));
+    } else {
+      response.write(handleDefaultView(categories));
+    }
+    response.end();
+  })
+  .listen(PORT);
