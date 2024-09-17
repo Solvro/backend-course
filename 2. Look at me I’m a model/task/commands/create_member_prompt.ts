@@ -16,10 +16,8 @@ export default class CreateMemberPrompt extends BaseCommand {
   @args.string({ description: 'Last name of the member', required: false })
   declare lastName?: string
 
-  @args.spread({ description: 'Department IDs of the member', required: false })
-  declare departmentsIds?: string[]
-
   async run() {
+    
     if (!this.index) {
       this.index = await this.prompt.ask('Enter the index of the member:', {
         validate: (value) => {
@@ -41,17 +39,9 @@ export default class CreateMemberPrompt extends BaseCommand {
       })
     }
 
-    if (!this.departmentsIds || this.departmentsIds.length === 0) {
-      const departmentsInput = await this.prompt.ask(
-        'Enter department IDs of the member (comma-separated):',
-        {
-          default: '',
-        }
-      )
-      this.departmentsIds = departmentsInput
-        ? departmentsInput.split(',').map((id) => id.trim())
-        : []
-    }
+    const departments = await this.prompt.multiple("Select member departments",
+      await db.from('departments').select('id as name', 'name as message') 
+    )
 
     await db.table('members').insert({
       index: this.index,
@@ -59,11 +49,11 @@ export default class CreateMemberPrompt extends BaseCommand {
       last_name: this.lastName,
     })
 
-    if (this.departmentsIds) {
+    if (departments) {
       await db.table('member_departments').multiInsert(
-        this.departmentsIds.map((departmentId) => ({
+        departments.map(departmentId => ({
           member_index: this.index,
-          department_id: departmentId,
+          department_id: departmentId
         }))
       )
     }

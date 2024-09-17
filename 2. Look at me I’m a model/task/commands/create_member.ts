@@ -1,42 +1,66 @@
-import { BaseCommand, args } from '@adonisjs/core/ace'
+import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
+import Member from '#models/member'
+import Department from '#models/department'
+import MemberDepartment from '#models/member_department'
 import db from '@adonisjs/lucid/services/db'
 
 export default class CreateMember extends BaseCommand {
   static commandName = 'create:member'
-  static description = 'create'
+  static description = 'This command create members using prompts and models'
 
-  static options: CommandOptions = {
-    startApp: true,
-  }
-  @args.string({ description: 'Index of the member', required: true })
-  declare index: string
-
-  @args.string({ description: 'Name of the member', required: true })
-  declare firstName: string
-
-  @args.string({ description: 'Last name of the member', required: true })
-  declare lastName: string
-
-  @args.spread({ description: 'Role of the member', required: false })
-  declare departmentsIds: string[]
+  static options: CommandOptions = { startApp: true }
 
   async run() {
-    await db.rawQuery('INSERT INTO members (index, first_name, last_name) VALUES (?, ?, ?)', [
-      this.index,
-      this.firstName,
-      this.lastName,
+    const index =  await this.prompt.ask('Enter the index of the member', {
+      validate: (value) => {
+        const isValid = /^\d{6}$/.test(value)
+        return isValid || 'Index must be a 6-digit number.'
+      },
+    })
+
+    const firstName = await this.prompt.ask('Enter the first name of the member', {
+      validate: (value) => value.length > 0 || 'First name is required.',
+    })
+
+    
+    const lastName = await this.prompt.ask('Enter the last name of the member', {
+      validate: (value) => value.length > 0 || 'Last name is required.',
+    })
+
+    const status = await this.prompt.choice('Select the status of the member', [
+      'implementation',
+      'active',
+      'alumni',
+      'inactive',
     ])
 
-    if (this.departmentsIds && this.departmentsIds.length > 0) {
-      const values = this.departmentsIds.map((departmentId) => [this.index, departmentId])
-      const placeholders = values.map(() => '(?, ?)').join(', ')
+    // Step 4: Prompt for the department (allowing the user to select from available departments)
+    const departments = await Department.all()
+    const departmentChoices = departments.map((dept) => ({
+      name: dept.id.toString(),
+      message: dept.name,
+    }))
 
-      const query = `INSERT INTO member_departments (member_index, department_id) VALUES ${placeholders}`
+    const departmentId = await this.prompt.choice('Select the department for the member', departmentChoices)
 
-      await db.rawQuery(query, values.flat())
-    }
+    // Step 5: Create a new member
+    const member = await Member.create({
+      index: Number(index),
+      firstName,
+      lastName,
+      status: status as 'implementation' | 'active' | 'alumni' | 'inactive', // Ensure type safety
+    })
 
-    this.logger.info(`Member ${this.firstName} created successfully.`)
+    // Step 6: Assign the member to the department
+    await MemberDepartment.create({
+      member_index: member.index,
+      department_id: parseInt(departmentId),
+    })
+
+    this.logger.info(`Member ${firstName} ${lastName} created and assigned to department ID ${departmentId}.`)
+  
+
+    this.logger.success('Member created and assigned to departments successfully.')
   }
 }
