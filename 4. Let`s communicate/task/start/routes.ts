@@ -11,10 +11,13 @@ const MembersController = () => import('#controllers/members_controller')
 import router from '@adonisjs/core/services/router'
 import AutoSwagger from 'adonis-autoswagger'
 import swagger from '#config/swagger'
+import { middleware } from './kernel.js'
 
 router
   .group(() => {
-    router.resource('members', MembersController).apiOnly()
+    router
+      .resource('members', MembersController)
+      .use(['destroy', 'store', 'update'], middleware.eloZelo())
     router.get('/swagger', async () => {
       return AutoSwagger.default.docs(router.toJSON(), swagger)
     })
