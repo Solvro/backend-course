@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Members Table </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+        <a href="/"><- Powrót</a>
+        <h2>Index: <span>{{member.index}}</span></h2>
+        <h2>Imię: <span>{{member.firstName}}</span></h2>
+        <h2>Nazwisko: <span>{{member.lastName}}</span></h2>
+        <h2>Mail: <span>{{member.index}}@student.pwr.edu.pl</span></h2>
+        <h2>Utworzono: 
+            <span>{{member.createdAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</span>
+        </h2>
+        <h2>Zaktualizowano:
+            <span>{{member.updatedAt.toFormat('yyyy-LL-dd HH:mm:ss')}}</span>
+        </h2>
+</body>
+</html>

@@ -1,0 +1,79 @@
+/* Styl dla ciała strony */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Styl dla linku "Dodaj nowego studenta" */
+a {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+a:hover {
+  background-color: #2980b9;
+}
+
+/* Stylizacja tabeli */
+table {
+  width: 80%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Stylizacja nagłówków tabeli */
+th {
+  background-color: #3498db;
+  color: white;
+  text-align: left;
+  padding: 12px;
+  font-size: 1.1em;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Stylizacja komórek w tabeli */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1em;
+  color: #555;
+}
+
+/* Efekt hover na wierszach tabeli */
+tr:hover {
+  background-color: #f2f2f2;
+}
+
+/* Styl dla linków w kolumnie "Szczegóły" */
+td a {
+  color: white;
+  text-decoration: none;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: auto
+}

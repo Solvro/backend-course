@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dodaj nowego członka</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+  <a href="/">Powrót</a>
+  
+  <h2>Dodaj nowego członka</h2>
+  @each(error in flashMessages.get('errors')) 
+  <p style="color:red">{{error}}</p>
+  @endeach
+  <!-- Formularz do dodania nowego członka -->
+  <form action="/create" method="POST">
+    {{ csrfField() }}
+    <label for="index">Index:</label>
+    <input type="text" name="index" required>
+
+    <label for="firstName">Imię:</label>
+    <input type="text" name="firstName" required>
+
+    <label for="lastName">Nazwisko:</label>
+    <input type="text" name="lastName" required>
+    <label for="status">Status:</label>
+    <select name="status" required>
+      <option value="implementation">Implementation</option>
+      <option value="active">Active</option>
+      <option value="alumni">Alumni</option>
+      <option value="inactive">Inactive</option>
+    </select>
+    <br>
+    <button type="submit">Dodaj</button>
+  </form>
+</body>
+</html>
