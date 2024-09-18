@@ -7,6 +7,9 @@ export default class Member extends BaseModel {
   declare id: number
 
   @column()
+  declare index: string
+
+  @column()
   declare firstName: string
 
   @column()

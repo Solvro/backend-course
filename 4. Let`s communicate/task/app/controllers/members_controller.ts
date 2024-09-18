@@ -4,7 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { fields } from '@vinejs/vine/defaults'
 
 export default class MembersController {
-  FIELDS = ['id', 'firstName', 'lastName', 'status']
+  FIELDS = ['id', 'index', 'firstName', 'lastName', 'status']
 
   async index({ request, response }: HttpContext) {
     const page = Number(request.input('page', 1))

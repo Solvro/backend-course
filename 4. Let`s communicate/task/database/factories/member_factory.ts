@@ -7,6 +7,7 @@ export const MemberFactory = factory
     const statusValues = Object.values(Status)
     const randomStatus = statusValues[Math.floor(Math.random() * statusValues.length)]
     return {
+      index: faker.string.numeric({ length: 6, allowLeadingZeros: true }),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
       status: randomStatus,
