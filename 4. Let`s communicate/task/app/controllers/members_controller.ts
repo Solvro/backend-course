@@ -5,10 +5,20 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class MembersController {
   async index({ request, response }: HttpContext) {
     const page = Number(request.input('page', 1))
-    const limit = 10
-    const members = await Member.query()
-      .limit(limit)
-      .offset(limit * (page - 1))
+    const perPage = Number(request.input('perPage', 10))
+
+    const firstName = request.input('firstName', '')
+    const lastName = request.input('lastName', '')
+    const status = String(request.input('status', ''))
+
+    const membersQuery = Member.query()
+
+    if (firstName) membersQuery.where('first_name', firstName)
+    if (lastName) membersQuery.where('last_name', lastName)
+    if (status) membersQuery.where('status', status)
+
+    const members = await membersQuery.limit(perPage).offset(perPage * (page - 1))
+
     response.json({
       message: 'Members fetched successfully!',
       data: members,
