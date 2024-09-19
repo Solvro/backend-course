@@ -1,7 +1,6 @@
 import Member from '#models/member'
 import { createMemberValidator } from '#validators/member'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fields } from '@vinejs/vine/defaults'
 
 export default class MembersController {
   FIELDS = ['id', 'index', 'firstName', 'lastName', 'status']

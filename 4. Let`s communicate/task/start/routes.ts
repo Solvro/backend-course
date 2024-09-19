@@ -18,6 +18,7 @@ router
     router
       .resource('members', MembersController)
       .use(['destroy', 'store', 'update'], middleware.eloZelo())
+      .apiOnly()
     router.get('/swagger', async () => {
       return AutoSwagger.default.docs(router.toJSON(), swagger)
     })
