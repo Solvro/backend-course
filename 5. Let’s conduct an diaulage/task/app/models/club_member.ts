@@ -25,6 +25,9 @@ export default class ClubMember extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string
 
+  @column()
+  declare profilePhoto: string
+
   @column.dateTime({ 
     autoCreate: true,
     serialize: (value) => value.toFormat('yyyy-LL-dd HH:mm:ss')

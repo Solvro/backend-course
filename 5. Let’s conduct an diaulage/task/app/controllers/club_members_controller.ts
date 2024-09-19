@@ -1,6 +1,7 @@
 import ClubMember from "#models/club_member"
 import { createClubMemberValidator } from "#validators/club_member"
 import { HttpContext } from "@adonisjs/core/http"
+import drive from "@adonisjs/drive/services/main"
 
 export default class ClubMembersController {
     async index({request}: HttpContext) {
@@ -20,6 +21,18 @@ export default class ClubMembersController {
     async update({params, request}: HttpContext) {
         const inputData = await createClubMemberValidator(Number(params.index)).validate(request.all())
         const member = await ClubMember.findOrFail(params.index)
+
+        const image = request.file('profilePhoto', {
+            size: '10mb',
+            extnames: ['jpeg', 'jpg', 'png']
+        })
+
+        if(image) {
+            const path = `club_members/${member.index}.${image.extname}`
+            await image.moveToDisk(path)
+            member.merge({ profilePhoto: await drive.use().getUrl(path) })
+        }
+
         member.merge(inputData).save()
         return { message: 'Member updated successfully', member}
     }
