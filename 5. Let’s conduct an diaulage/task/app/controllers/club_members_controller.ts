@@ -1,5 +1,5 @@
 import ClubMember from "#models/club_member"
-import { createClubMemberValidator } from "#validators/club_member"
+import { createClubMemberValidator, updateClubMemberValidator } from "#validators/club_member"
 import { HttpContext } from "@adonisjs/core/http"
 import drive from "@adonisjs/drive/services/main"
 
@@ -13,13 +13,13 @@ export default class ClubMembersController {
     }
 
     async store({request}: HttpContext) {
-        const inputData = await createClubMemberValidator().validate(request.all())
+        const inputData = await createClubMemberValidator.validate(request.all())
         const member = await ClubMember.create({...inputData})
         return { message: 'Member created successfully', member}
     }
 
     async update({params, request}: HttpContext) {
-        const inputData = await createClubMemberValidator(Number(params.index)).validate(request.all())
+        const inputData = await updateClubMemberValidator.validate(request.all())
         const member = await ClubMember.findOrFail(params.index)
 
         const image = request.file('profilePhoto', {
