@@ -4,8 +4,7 @@ import joker from 'one-liner-joke'
 
 http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-    let view;
-    view = req.url.startsWith("/category")
+    let view = req.url.startsWith("/category")
         ? handleCategoryView(req.url.substring("/category".length + 1, req.url.length - 1))
         : handleMainView();
     res.end(view);
