@@ -22,4 +22,5 @@ router.group(() => {
     .use(['store'], throttleRequestsAuth)
 
   router.post('login', [AuthLoginController, 'login']).use(throttleRequestsAuth)
+  router.get('membersAggregation', [ClubMembersController, 'indexAggregation'])
 }).prefix('api/v1')

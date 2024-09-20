@@ -1,11 +1,18 @@
 import ClubMember from "#models/club_member"
+import MemberAggregationService from "#services/member_aggregation_service"
 import { createClubMemberValidator, updateClubMemberValidator } from "#validators/club_member"
+import { inject } from "@adonisjs/core"
 import { HttpContext } from "@adonisjs/core/http"
 import drive from "@adonisjs/drive/services/main"
 
 export default class ClubMembersController {
     async index({request}: HttpContext) {
         return await ClubMember.query().paginate(request.input('page', 1), request.input('perPage', 10))
+    }
+
+    @inject()
+    async indexAggregation({}: HttpContext, memberAggregationService: MemberAggregationService) {
+        return await memberAggregationService.aggregateMembersByStatusAndIndexRange()
     }
 
     async show({params}: HttpContext) {
