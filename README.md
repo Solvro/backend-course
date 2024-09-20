@@ -11,10 +11,10 @@ Siemanko 👋, niezmiernie miło mi was powitać w ćwiczeniowej części naszeg
 1. [Jak i gdzie przechowywać dane (Data, data, data…) – bazy danych, struktury danych , migracje, seedery](https://docs.google.com/document/d/1jKi6RAydbj4XiA4YVXEbgYfzhQ23mmKHIR9D9SrwF2o/edit)
 2. [Reprezentacja danych (Look at me I’m a model) – modele, CRUD](https://docs.google.com/document/d/1Bpw-cz7NpXy3Y92pdol54emgqDV3yWST6M05Ycq025k/edit)
 3. [Wyświetlanie danych (Let me see)  – ścieżki,  widoki, formsy,  validatory](https://docs.google.com/document/d/1s-e5fVTDZhGJMZOoOg0iiEloLy8nvCe7Akp6hWJC8lw/edit)
-4. Podstawy API (Let’s communicate) – REST, Headery, Standardy, Dokumentacja
-5. API Zaawansowane (Let’s conduct an diaulage) – Autoryzacja, Optymalizacja, Logi, Websockety, Zdjęcia, Testy
-6. Hostowanie oprogramowania (Let’s the world to see)– docker, vps,  aws, gcp, dns
-7. Procesy w tle (The work done in shadows) – kolejki, maile, powiadomienia
+4. [Podstawy API (Let’s communicate) – REST, Headery, Standardy, Dokumentacja](https://docs.google.com/document/d/1Fx9OsVxQAf1jbLaxz3PxtnQ3dx7T9Jn3K2x97-MgK_o/edit)
+5. [API Zaawansowane (Let’s conduct an diaulage)](https://docs.google.com/document/d/1yai1D80VgeqCUw_NdksGRXL2_DRDsV0MRQpukKvIA1M) – Autoryzacja, Optymalizacja, Logi, Websockety, Zdjęcia, Testy
+6. [Procesy w tle (The work done in shadows) – kolejki, maile, powiadomienia](https://docs.google.com/document/d/1M6XstnUshPAXmlVmvo3WG8pS-iXEODxOerYLc8xcxds/edit)
+7. Hostowanie oprogramowania (Let’s the world to see)– docker, vps,  aws, gcp, dns
 8. Zakończenie.  Zaprezentowanie prac. (Let’s see what you’ve got/Even the best party must end someday)
 
 ## Jak pracujemy
