@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
 
 export default class Student extends BaseModel {
   @column({ isPrimary: true })
@@ -13,6 +13,11 @@ export default class Student extends BaseModel {
 
   @column()
   declare status: 'IMPLEMENTATION' | 'ACTIVE' | 'ALUMNI' | 'INACTIVE'
+
+  @computed()
+  get email(): string {
+    return `${this.index}@student.pwr.edu.pl`
+  }
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

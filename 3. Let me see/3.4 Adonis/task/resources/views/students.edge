@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>Students</title>
+  <style>
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    td {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
   @if(students)
-    <table>
+    <table class="center">
       <tr>
         <th>Index</th>
         <th>First name</th>
@@ -15,7 +26,7 @@
       </tr>
       @each(student in students)
         <tr>
-          <td>{{ student.index }}</td>
+          <td><a href="/{{ student.index }}">{{ student.index }}</a></td>
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
         </tr>
