@@ -13,6 +13,11 @@
       padding-left: 10px;
       padding-right: 10px;
     }
+
+    .pages {
+      text-align: center;
+      padding: 12px 0 12px 0
+    }
   </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -32,16 +37,28 @@
         </tr>
       @endeach
     </table>
-    @else
-      <p>No students available.</p>
-    @end
+  @else
+    <p>No students available.</p>
+  @end
 
-    @if(flashMessages.get('student.created'))
-        <p style="text-align: center; color: green">Student created successfully!</p>
+  @if(flashMessages.get('student.created'))
+      <p style="text-align: center; color: green">Student created successfully!</p>
+  @endif
+
+  <div class="pages">
+    @if(students.currentPage !== students.firstPage)
+      <a href="{{ students.getPreviousPageUrl() }}&perPage={{ students.perPage }}">← previous</a>
     @endif
+    @if(students.currentPage !== students.firstPage && students.currentPage !== students.lastPage)
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @endif
+    @if(students.currentPage !== students.lastPage)
+      <a href="{{ students.getNextPageUrl() }}&perPage={{ students.perPage }}">next →</a>
+    @endif
+  </div>
 
-    <form style="text-align: center">
-      <button type="submit" formaction="/students/create">Add student</button>
-    </form>
+  <form style="text-align: center">
+    <button type="submit" formaction="/students/create">Add student</button>
+  </form>
 </body>
 </html>

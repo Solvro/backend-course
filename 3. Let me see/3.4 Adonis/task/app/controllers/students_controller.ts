@@ -3,8 +3,12 @@ import Student, { Status } from '#models/student'
 import { createStudentValidator } from '#validators/student_validator'
 
 export default class StudentsController {
-  async index({ view }: HttpContext) {
-    return view.render('students/index', { students: await Student.all() })
+  async index({ view, request }: HttpContext) {
+    const students = await Student.query()
+      .orderBy('lastName', 'asc')
+      .paginate(request.input('page', 1), request.input('perPage', 10))
+    students.baseUrl('/students')
+    return view.render('students/index', { students })
   }
 
   async show({ view, params }: HttpContext) {
