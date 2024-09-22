@@ -26,7 +26,7 @@
       </tr>
       @each(student in students)
         <tr>
-          <td><a href="/{{ student.index }}">{{ student.index }}</a></td>
+          <td><a href="/students/{{ student.index }}">{{ student.index }}</a></td>
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
         </tr>
@@ -35,5 +35,13 @@
     @else
       <p>No students available.</p>
     @end
+
+    @if(flashMessages.get('student.created'))
+        <p style="text-align: center; color: green">Student created successfully!</p>
+    @endif
+
+    <form style="text-align: center">
+      <button type="submit" formaction="/students/create">Add student</button>
+    </form>
 </body>
 </html>

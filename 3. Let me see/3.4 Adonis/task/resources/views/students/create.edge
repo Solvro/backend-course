@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create student</title>
+  <style>
+    input, select {
+      margin-top: 12px;
+    }
+  </style>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+  <form action="/students/create" method="POST" style="text-align: center">
+    {{ csrfField() }}
+    <label>
+      Index: <input type="text" name="index" value="{{ old('index') || '' }}"/>
+    </label>
+    @inputError('index')
+      @each(message in $messages)
+        <p style="color:red">{{ message }}</p>
+      @end
+    @end
+    <br>
+
+    <label>
+      First name: <input type="text" name="firstName" value="{{ old('firstName') || '' }}"/>
+    </label>
+    @inputError('firstName')
+      @each(message in $messages)
+        <p style="color:red">{{ message }}</p>
+      @end
+    @end
+    <br>
+
+    <label>
+      Last name: <input type="text" name="lastName" value="{{ old('lastName') || '' }}"/>
+    </label>
+    @inputError('lastName')
+      @each(message in $messages)
+        <p style="color:red">{{ message }}</p>
+      @end
+    @end
+    <br>
+
+    <label>
+      Status:
+      <select name="status">
+        @each(status in statuses)
+          <option>{{ status }}</option>
+        @end
+      </select>
+    </label>
+    @inputError('status')
+      @each(message in $messages)
+        <p style="color:red">{{ message }}</p>
+      @end
+    @end
+    <br><br>
+
+    <button type="submit">Create</button>
+    <button type="submit" formaction="/students" formmethod="get">Back</button>
+  </form>
+</body>
+</html>

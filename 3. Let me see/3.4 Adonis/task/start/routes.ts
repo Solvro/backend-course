@@ -8,17 +8,15 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import Student from '#models/student'
-
-router.on('/adonis-home').render('pages/home')
-
-router.on('/').render('students', {
-  students: await Student.all(),
-})
+const StudentsController = () => import('#controllers/students_controller')
 
 router
-  .get('/:index', async ({ params, view }) => {
-    const student = await Student.findOrFail(params.index)
-    return view.render('student', { student })
+  .group(() => {
+    router.get('/', [StudentsController, 'index'])
+    router.get('/:index', [StudentsController, 'show']).where('index', router.matchers.number())
+    router.get('/create', [StudentsController, 'create'])
+    router.post('/create', [StudentsController, 'store'])
   })
-  .where('index', router.matchers.number()) // must return 404 status code on incorrect url
+  .prefix('/students')
+
+router.on('/*').redirect('/students')

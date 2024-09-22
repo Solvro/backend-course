@@ -1,4 +1,5 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
+import { Status } from '#models/student'
 
 export default class extends BaseSchema {
   protected tableName = 'students'
@@ -9,14 +10,13 @@ export default class extends BaseSchema {
       table.increments('index', { primaryKey: true })
       table.string('first_name', 30)
       table.string('last_name', 30)
-      let values = ['IMPLEMENTATION', 'ACTIVE', 'ALUMNI', 'INACTIVE']
       table
-        .enum('status', values, {
+        .enum('status', Object.values(Status), {
           useNative: true,
           enumName: this.enumName,
           existingType: false,
         })
-        .defaultTo(values[0])
+        .defaultTo(Status.IMPLEMENTATION)
       table.timestamps(true, true)
       // table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
       // table.timestamp('updated_at', { useTz: true })

@@ -12,7 +12,7 @@ export default class Student extends BaseModel {
   declare lastName: string
 
   @column()
-  declare status: 'IMPLEMENTATION' | 'ACTIVE' | 'ALUMNI' | 'INACTIVE'
+  declare status: Status
 
   @computed()
   get email(): string {
@@ -24,4 +24,11 @@ export default class Student extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+}
+
+export enum Status {
+  IMPLEMENTATION = 'IMPLEMENTATION',
+  ACTIVE = 'ACTIVE',
+  ALUMNI = 'ALUMNI',
+  INACTIVE = 'INACTIVE',
 }
