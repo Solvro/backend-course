@@ -9,7 +9,7 @@ export default class SolvroNotification extends BaseMail {
    * the email is sent or queued.
    */
   prepare() {
-    this.message.to('kn.solvro@pwr.edu.pl')
+    this.message.to('t.trela04@gmail.com')
       .htmlView('emails/solvro_mail.edge')
     }
 }
