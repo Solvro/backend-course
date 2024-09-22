@@ -1,3 +1,4 @@
+import SolvroNotification from '#mails/solvro_notification'
 import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
 import mail from '@adonisjs/mail/services/main'
@@ -11,12 +12,6 @@ export default class SendMail extends BaseCommand {
   }
 
   async run() {
-    await mail.send((message) => {
-      message
-        .to('kn.solvro@pwr.edu.pl')
-        .from('Elo żelo')
-        .subject('Backend course smtp')
-        .htmlView('emails/solvro_mail.edge')
-    })
+    await mail.send(new SolvroNotification)
   }
 }
