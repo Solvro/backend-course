@@ -2,18 +2,23 @@ import type { HttpContext } from '@adonisjs/core/http'
 import SolvroMember from '#models/solvro_member'
 import { editMember, deleteMember } from '#abilities/main'
 import { createMemberValidator, updateMemberValidator } from '#validators/member'
+import drive from '@adonisjs/drive/services/main'
+import AggregateMembersService from '#services/aggregate_members'
+import { inject } from '@adonisjs/core'
 
 export default class MembersController {
   /**
    *@description Display a list of resource
    */
-  async index({ request }: HttpContext) {
+  @inject()
+  async index({ request }: HttpContext, aggregate_members: AggregateMembersService) {
     const page = Number(request.input('page', 1))
     const perPage = Number(request.input('perPage', 5))
 
     const members = (await SolvroMember.query().paginate(page, perPage)).serialize({
       fields: { omit: ['createdAt', 'updatedAt'] },
     })
+    members.data.push({ aggregation: await aggregate_members.aggregate() })
     return members
   }
 
@@ -42,9 +47,19 @@ export default class MembersController {
     }
     const payload = request.all()
     const data = await updateMemberValidator.validate(payload)
-    console.log(data)
 
-    await member.merge(data).save() //why it doesn't save to DB???
+    const image = request.file('photo', {
+      size: '2mb',
+      extnames: ['jpeg', 'jpg', 'png'],
+    })
+
+    if (image) {
+      const path = `members/${params.index}.${image.extname}`
+      image.moveToDisk(path)
+      member.merge({ profilePhoto: await drive.use().getSignedUrl(path) })
+    }
+
+    await member.merge(data).save()
     return member
   }
 
