@@ -3,7 +3,6 @@ import SolvroMember from '#models/solvro_member'
 import { editMember, deleteMember } from '#abilities/main'
 import { createMemberValidator, updateMemberValidator } from '#validators/member'
 import drive from '@adonisjs/drive/services/main'
-import AggregateMembersService from '#services/aggregate_members'
 import { inject } from '@adonisjs/core'
 
 export default class MembersController {
@@ -11,14 +10,13 @@ export default class MembersController {
    *@description Display a list of resource
    */
   @inject()
-  async index({ request }: HttpContext, aggregate_members: AggregateMembersService) {
+  async index({ request }: HttpContext) {
     const page = Number(request.input('page', 1))
     const perPage = Number(request.input('perPage', 5))
 
     const members = (await SolvroMember.query().paginate(page, perPage)).serialize({
       fields: { omit: ['createdAt', 'updatedAt'] },
     })
-    members.data.push({ aggregation: await aggregate_members.aggregate() })
     return members
   }
 
