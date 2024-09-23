@@ -1,15 +1,8 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
 import router from '@adonisjs/core/services/router'
 import AutoSwagger from "adonis-autoswagger"
 import swagger from "#config/swagger";
+import {middleware} from "#start/kernel";
+import AuthController from "#controllers/auth_controller";
 
 const MembersController = () => import("#controllers/members_controller");
 
@@ -23,5 +16,11 @@ router.get("/docs", async () => {
 })
 
 router.group(() => {
-  router.resource('members', MembersController).apiOnly().params({members: 'index'})
-}).prefix('api/v1')
+  router.resource('members', MembersController)
+    .apiOnly()
+    .params({members: 'index'})
+}).use(middleware.auth({guards: ['api']}))
+  .prefix('api/v1')
+
+router.post('members/:id/tokens', new AuthController().generateToken)
+  .prefix('api/v1')

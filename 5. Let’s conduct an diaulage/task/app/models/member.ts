@@ -1,8 +1,16 @@
 import {DateTime} from 'luxon'
-import {BaseModel, beforeSave, column} from '@adonisjs/lucid/orm'
+import {BaseModel, column} from '@adonisjs/lucid/orm'
 import hash from '@adonisjs/core/services/hash'
+import {withAuthFinder} from "@adonisjs/auth/mixins/lucid";
+import {compose} from "@adonisjs/core/helpers";
+import {DbAccessTokensProvider} from "@adonisjs/auth/access_tokens";
 
-export default class Member extends BaseModel {
+const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
+  uids: ['index'],
+  passwordColumnName: 'password',
+})
+
+export default class Member extends compose(BaseModel, AuthFinder) {
   @column({isPrimary: true})
   declare index: number
 
@@ -24,10 +32,5 @@ export default class Member extends BaseModel {
   @column.dateTime({autoCreate: true, autoUpdate: true})
   declare updatedAt: DateTime
 
-  @beforeSave()
-  public static async hashPassword(member: Member) {
-    if (member.$dirty.password) {
-      member.password = await hash.make(member.password)
-    }
-  }
+  static accessTokens = DbAccessTokensProvider.forModel(Member)
 }
