@@ -2,6 +2,7 @@ import router from '@adonisjs/core/services/router'
 import AutoSwagger from "adonis-autoswagger"
 import swagger from "#config/swagger";
 import {middleware} from "#start/kernel";
+import {AuthThrottle} from "#start/limiter";
 import AuthController from "#controllers/auth_controller";
 
 const MembersController = () => import("#controllers/members_controller");
@@ -23,4 +24,5 @@ router.group(() => {
   .prefix('api/v1')
 
 router.post('members/:id/tokens', new AuthController().generateToken)
+  .use(AuthThrottle)
   .prefix('api/v1')
