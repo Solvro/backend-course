@@ -1,0 +1,16 @@
+{
+  "name": "templating-task",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Dawid Linek",
+  "type": "module",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "one-liner-joke": "^1.2.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
