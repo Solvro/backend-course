@@ -49,8 +49,11 @@
     "typescript": "~5.5"
   },
   "dependencies": {
+    "@adonisjs/auth": "^9.2.3",
     "@adonisjs/core": "^6.12.1",
+    "@adonisjs/limiter": "^2.3.2",
     "@adonisjs/lucid": "^21.2.0",
+    "@adonisjs/shield": "^8.1.1",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {

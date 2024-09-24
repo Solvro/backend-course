@@ -39,3 +39,6 @@ router.post('/login', async ({ request, auth, response }) => {
     await auth.use('api').authenticate()
     return auth.user
   }).middleware('auth')
+
+router.post('/register', 'AuthController.register').middleware('rateLimiter')
+router.post('/login', 'AuthController.login').middleware('rateLimiter')
