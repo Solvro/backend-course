@@ -42,3 +42,4 @@ router.post('/login', async ({ request, auth, response }) => {
 
 router.post('/register', 'AuthController.register').middleware('rateLimiter')
 router.post('/login', 'AuthController.login').middleware('rateLimiter')
+router.post("/profile/update", 'ProfileController.updateProfile').middleware('auth')

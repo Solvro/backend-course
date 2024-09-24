@@ -30,7 +30,8 @@ export default defineConfig({
     },
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/shield/shield_provider'),
-    () => import('@adonisjs/limiter/limiter_provider')
+    () => import('@adonisjs/limiter/limiter_provider'),
+    () => import('@adonisjs/drive/drive_provider')
   ],
 
   /*
