@@ -23,6 +23,9 @@ export default class Member extends compose(BaseModel, AuthFinder) {
   @column()
   declare status: 'onboarding' | 'active' | 'honorary' | 'inactive'
 
+  @column()
+  declare photo: string
+
   @column({serializeAs: null})
   declare password: string
 

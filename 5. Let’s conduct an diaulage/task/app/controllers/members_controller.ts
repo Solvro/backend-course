@@ -1,12 +1,13 @@
-import type { HttpContext } from '@adonisjs/core/http'
+import type {HttpContext} from '@adonisjs/core/http'
 import Member from "#models/member";
 import {createMemberValidator, updateMemberValidator} from "#validators/member";
+import drive from "@adonisjs/drive/services/main";
 
 export default class MembersController {
   /**
    * Display a list of resource
    */
-  async index({ request }: HttpContext) {
+  async index({request}: HttpContext) {
     return Member.query().paginate(request.input('page', 1), request.input('perPage', 10))
   }
 
@@ -22,16 +23,26 @@ export default class MembersController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {
+  async show({params}: HttpContext) {
     return await Member.findOrFail(params.index)
   }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {
+  async update({params, request}: HttpContext) {
     const updatedMember = await updateMemberValidator.validate(request.all())
     const currMember = await Member.findByOrFail(params.index)
+    const image = request.file('photo', {
+      size: '10mb',
+      extnames: ['jpeg', 'jpg', 'png'],
+    })
+    if (image) {
+      const path = `members/${currMember.index}.${image.extname}`
+      await image.moveToDisk(path)
+      currMember.merge({ photo: await drive.use().getUrl(path) })
+    }
+
     currMember.merge(updatedMember)
     await currMember.save()
     return {message: "Member updated successfully.", currMember}
@@ -40,7 +51,7 @@ export default class MembersController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {
+  async destroy({params}: HttpContext) {
     const member = await Member.findOrFail(params.index)
     await member.delete()
     return {message: "Member deleted successfully."}
