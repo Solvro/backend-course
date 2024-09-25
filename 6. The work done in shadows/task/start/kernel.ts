@@ -10,7 +10,13 @@
 
 import router from '@adonisjs/core/services/router'
 import server from '@adonisjs/core/services/server'
+import cron from 'node-cron'
+import email_service from '#services/email_service'
 
+cron.schedule('* * * * *', async () => {
+    await email_service.sendCreativeMail()
+    console.log('Email sent successfully')
+  })
 /**
  * The error handler is used to convert an exception
  * to a HTTP response.
