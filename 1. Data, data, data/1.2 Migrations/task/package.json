@@ -38,9 +38,9 @@
   },
   "dependencies": {
     "@adonisjs/core": "^6.12.1",
-    "@adonisjs/lucid": "^21.1.1",
+    "@adonisjs/lucid": "^21.2.0",
     "luxon": "^3.5.0",
-    "pg": "^8.12.0",
+    "pg": "^8.13.0",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {
