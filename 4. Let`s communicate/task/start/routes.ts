@@ -8,9 +8,16 @@
 */
 
 import router from '@adonisjs/core/services/router'
+const StudentsController = () => import('#controllers/students_controller')
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+router
+  .group(() => {
+    router
+      .resource('students', StudentsController)
+      .apiOnly()
+      .params({
+        students: 'index',
+      })
+      .where('index', router.matchers.number())
+  })
+  .prefix('/api/v1')
