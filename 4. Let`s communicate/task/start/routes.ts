@@ -8,6 +8,7 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import { middleware } from '#start/kernel'
 const StudentsController = () => import('#controllers/students_controller')
 
 router
@@ -19,5 +20,6 @@ router
         students: 'index',
       })
       .where('index', router.matchers.number())
+      .use(['store', 'update', 'destroy'], middleware.eloZelo())
   })
   .prefix('/api/v1')
