@@ -7,9 +7,21 @@ export default class StudentsController {
    * Display a list of resource
    */
   async index({ request }: HttpContext) {
-    return await Student.query()
-      .orderBy('createdAt', 'desc')
-      .paginate(request.input('page', 1), request.input('perPage', 10))
+    const query = Student.query()
+
+    // filter
+    let filters = request.only(['firstName', 'lastName', 'status'])
+    for (let filterKey in filters) {
+      if (filterKey === 'status')
+        query.whereRaw('status::text ILIKE ?', [`%${filters[filterKey]}%`])
+      else query.whereLike(filterKey, `%${filters[filterKey as keyof typeof filters]}%`)
+    }
+
+    // sort
+    query.orderBy(request.input('sortBy', 'createdAt'), request.input('order', 'asc'))
+
+    // paginate
+    return await query.paginate(request.input('page', 1), request.input('perPage', 10))
   }
 
   /**
