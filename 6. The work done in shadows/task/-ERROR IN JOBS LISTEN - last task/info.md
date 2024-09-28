@@ -1,0 +1,1 @@
+Zainstalowałem adonisjs-jobs, skonfigurowałem oraz stworzyłem joba według materiałów oraz dokumentacji adonisa, natomiast przy wywołaniu "node ace jobs:listen" dostaję błędy tj. w printscreen. Doczytałem że najprawdopodobniej chodzi o redisa, jego błędną konfigurację albo jego brak. Próbowałem go instalować, konfigurować jednak nie udało się. Nie wiem jak to rozwiązać.
