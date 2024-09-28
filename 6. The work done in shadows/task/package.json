@@ -54,6 +54,7 @@
     "@vinejs/vine": "^2.1.0",
     "adonisjs-scheduler": "^1.0.5",
     "edge.js": "^6.2.0",
+    "mjml": "^4.15.3",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {

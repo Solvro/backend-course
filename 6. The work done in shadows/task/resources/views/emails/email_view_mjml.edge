@@ -1,0 +1,79 @@
+@mjml()
+<mjml>
+    <mj-head>
+      <mj-title>Creative Greeting from Solvro Team</mj-title>
+      <mj-attributes>
+        <mj-all font-family="Arial, sans-serif" />
+        <mj-text font-size="16px" />
+        <mj-button background-color="#f45e43" color="white" border-radius="5px" />
+      </mj-attributes>
+      <mj-style>
+        .banner-img img {
+          width: 100% !important;
+          height: auto !important;
+        }
+      </mj-style>
+    </mj-head>
+    
+    <mj-body background-color="#f0f0f0">
+      <!-- Hero Image -->
+      <mj-section padding="0">
+        <mj-column>
+          <mj-image src="https://scontent-waw2-2.xx.fbcdn.net/v/t39.30808-6/451483196_502755932312498_2132184950216212841_n.png?_nc_cat=103&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=gH8sxEXVMxAQ7kNvgHpEX4R&_nc_ht=scontent-waw2-2.xx&oh=00_AYAfYoeuwRYhpoLW9ppoT7RynVOHR9FQELGbagcYm1dRBg&oe=66FDC16E" 
+                          alt="Creative Banner" class="banner-img" />
+        </mj-column>
+      </mj-section>
+  
+      <!-- Welcome Section -->
+      <mj-section background-color="#ffffff" padding="20px">
+        <mj-column>
+          <mj-text font-size="24px" font-weight="bold" color="#333333" align="center">
+            Welcome to the Creative World of Solvro!
+          </mj-text>
+          <mj-divider border-color="#f45e43" border-width="3px" />
+          <mj-text align="center" color="#555555">
+            Dear <span style="font-weight:bold;">{{ name }}</span>, we are excited to have you here! Explore the latest trends and creative ideas in technology with us.
+          </mj-text>
+        </mj-column>
+      </mj-section>
+  
+      <!-- Image and Text Section -->
+      <mj-section background-color="#ffffff" padding="20px">
+        <mj-column width="50%">
+          <mj-image src="https://th.bing.com/th/id/OIP.-SZQJ1A2U1Br2jlOZCPZPAHaHa?rs=1&pid=ImgDetMain" alt="Innovation Image" />
+        </mj-column>
+        <mj-column width="50%">
+          <mj-text color="#333333" font-size="18px">
+            Innovating the Future
+          </mj-text>
+          <mj-text color="#555555">
+            At Solvro, we are constantly pushing the boundaries of technology to create innovative solutions that make a difference. Join us on our journey to explore new horizons!
+          </mj-text>
+        </mj-column>
+      </mj-section>
+  
+      <!-- Call to Action Button -->
+      <mj-section background-color="#ffffff" padding="20px">
+        <mj-column>
+          <mj-button href="https://solvro.pwr.edu.pl" padding="15px 30px">
+            Learn More About Us
+          </mj-button>
+        </mj-column>
+      </mj-section>
+  
+      <!-- Footer -->
+      <mj-section background-color="#333333" padding="20px">
+        <mj-column>
+          <mj-text color="#ffffff" align="center">
+            Follow us on:
+          </mj-text>
+          <mj-social align="center" color="#ffffff" mode="horizontal">
+            <mj-social-element name="facebook" href="https://www.facebook.com/knsolvro" />
+            <mj-social-element name="linkedin" href="https://www.linkedin.com/company/knsolvro" />
+            <mj-social-element name="github" href="https://github.com/Solvro" />
+          </mj-social>
+        </mj-column>
+      </mj-section>
+    </mj-body>
+  </mjml>
+@end
