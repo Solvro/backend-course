@@ -6,8 +6,10 @@ export default class StudentsController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {
-    return await Student.all()
+  async index({ request }: HttpContext) {
+    return await Student.query()
+      .orderBy('createdAt', 'desc')
+      .paginate(request.input('page', 1), request.input('perPage', 10))
   }
 
   /**
