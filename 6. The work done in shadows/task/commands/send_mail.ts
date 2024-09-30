@@ -1,7 +1,6 @@
-import SolvroNotification from '#mails/solvro_notification'
 import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import mail from '@adonisjs/mail/services/main'
+import SendEmail from '../app/jobs/send_email.js'
 
 export default class SendMail extends BaseCommand {
   static commandName = 'send:mail'
@@ -12,6 +11,9 @@ export default class SendMail extends BaseCommand {
   }
 
   async run() {
-    await mail.send(new SolvroNotification)
+    await SendEmail.dispatch({}, {
+      attempts: 3,
+      delay: 1000
+    })
   }
 }

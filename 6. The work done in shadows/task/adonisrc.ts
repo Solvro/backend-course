@@ -10,7 +10,7 @@ export default defineConfig({
   | will be scanned automatically from the "./commands" directory.
   |
   */
-  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@adonisjs/mail/commands'), () => import('adonisjs-scheduler/commands')],
+  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@adonisjs/mail/commands'), () => import('adonisjs-scheduler/commands'), () => import('adonisjs-jobs/commands')],
 
   /*
   |--------------------------------------------------------------------------
@@ -39,7 +39,8 @@ export default defineConfig({
     {
       file: () => import('adonisjs-scheduler/scheduler_provider'),
       environment: ['console'],
-    }
+    },
+    () => import('adonisjs-jobs/jobs_provider')
   ],
 
   /*
