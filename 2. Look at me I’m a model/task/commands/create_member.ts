@@ -1,6 +1,6 @@
 import { args, BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import db from '@adonisjs/lucid/services/db'
+import Student from '#models/student'
 
 export default class CreateMember extends BaseCommand {
   static commandName = 'create:member'
@@ -11,17 +11,23 @@ export default class CreateMember extends BaseCommand {
   }
 
   @args.string({ required: false })
+  declare index: string;
+
+  @args.string({ required: false })
   declare firstName: string
 
   @args.string({ required: false })
   declare lastName: string
 
   @args.string({ required: false })
-  declare status: string
+  declare status: 'inactive' | 'active' | 'honourable' | 'participative'
 
   async run() {
-    console.log(this.firstName)
-    
+    if (!this.index) {
+      this.index = await this.prompt.ask('Enter index: ');
+      return;
+    }
+
     if (!this.firstName) {
       this.firstName = await this.prompt.ask('Enter first name:')
     }
@@ -34,8 +40,9 @@ export default class CreateMember extends BaseCommand {
       this.status = await this.prompt.ask('Enter status (active, inactive, honourable, participative):')
     }
 
-    await db.table('students')
-    .insert({
+    await Student
+    .create({
+      index: this.index,
       first_name: this.firstName,
       last_name: this.lastName,
       status: this.status
