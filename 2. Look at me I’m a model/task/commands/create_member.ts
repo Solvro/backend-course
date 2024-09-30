@@ -21,13 +21,12 @@ export default class CreateMember extends BaseCommand {
 
   async run() {
     console.log(this.firstName)
-    console.log(this.lastName)
-    console.log(this.status)
-
-    await db.rawQuery(`
-      INSERT INTO students (first_name, last_name, status) 
-      VALUES (?, ?, ?)
-    `, [this.firstName, this.lastName, this.status]);
+    await db.table('students')
+    .insert({
+      first_name: this.firstName,
+      last_name: this.lastName,
+      status: this.status
+    })
 
   }
 }
