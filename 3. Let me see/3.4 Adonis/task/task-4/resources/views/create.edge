@@ -4,18 +4,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Members table </title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Dodaj Członka</title>
 </head>
-<body>
-    <a href="/"><- Powrót</a>
-    <form action="/create" method="POST">
-       {{ csrfField() }} // zabezpieczenie przed CSRF
-        <input type="number" name="index">
-        <input type="text" name="firstName">
-        <input type="text" name="lastName">
-        <input type="date" name="dateOfBirth">
-        <button type="submit">Wyślij</button>
+
+<body class="bg-gray-100 p-6">
+    <a href="/" class="inline-block mb-4 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">← Powrót</a>
+
+    <form action="/create" method="POST" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        <div class="mb-4">
+            <label class="block mb-1">Index</label>
+            <input type="number" name="index" class="w-full px-3 py-2 border rounded" required>
+        </div>
+        <div class="mb-4">
+            <label class="block mb-1">Imię</label>
+            <input type="text" name="firstName" class="w-full px-3 py-2 border rounded" required>
+        </div>
+        <div class="mb-4">
+            <label class="block mb-1">Nazwisko</label>
+            <input type="text" name="lastName" class="w-full px-3 py-2 border rounded" required>
+        </div>
+        <div class="mb-4">
+            <label class="block mb-1">Status</label>
+            <select name="status" class="w-full px-3 py-2 border rounded" required>
+                <option value="implementation">Implementation</option>
+                <option value="active">Active</option>
+                <option value="alumni">Alumni</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+        <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Wyślij</button>
     </form>
-</body></html>
+</body>
+
+</html>
