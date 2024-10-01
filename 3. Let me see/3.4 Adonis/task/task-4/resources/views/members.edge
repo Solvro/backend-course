@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> members table </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-4">Lista Członków</h1>
+        <a href="/create" class="inline-block mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Dodaj nowego członka</a>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md text-center">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600">
+                        <th class="py-2 px-4 border-b">Index</th>
+                        <th class="py-2 px-4 border-b">Imię</th>
+                        <th class="py-2 px-4 border-b">Nazwisko</th>
+                        <th class="py-2 px-4 border-b">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @each(member in members)
+                    <tr class="hover:bg-gray-100">
+                        <td class="py-2 px-4 border-b">{{ member.index }}</td>
+                        <td class="py-2 px-4 border-b">{{ member.firstName }}</td>
+                        <td class="py-2 px-4 border-b">{{ member.lastName }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <a href="/{{ member.index }}" class="text-blue-500 hover:underline">Szczegóły</a>
+                        </td>
+                    </tr>
+                    @endeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
