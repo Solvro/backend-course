@@ -20,4 +20,13 @@ router.get('/', async ({ view }) => {
         members: await Member.all(),
     })
 })
+
+router.get('/:index', async ({ request, view }) => {
+    const index = request.param('index') 
+    const member = await Member.findByOrFail('index', index)
+    return view.render('member', {member})
+})
+
+router.on('create').render('create')
+
   

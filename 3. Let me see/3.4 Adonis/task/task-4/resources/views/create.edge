@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Members table </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+    <a href="/"><- Powrót</a>
+    <form action="/create" method="POST">
+       {{ csrfField() }} // zabezpieczenie przed CSRF
+        <input type="number" name="index">
+        <input type="text" name="firstName">
+        <input type="text" name="lastName">
+        <input type="date" name="dateOfBirth">
+        <button type="submit">Wyślij</button>
+    </form>
+</body></html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szczegóły Członka</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-4">Szczegóły Członka</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <p><strong>Index:</strong> {{ member.index }}</p>
+            <p><strong>Imię:</strong> {{ member.firstName }}</p>
+            <p><strong>Nazwisko:</strong> {{ member.lastName }}</p>
+            <p><strong>Status:</strong> {{ member.status }}</p>
+            <p><strong>Email:</strong> icreatedamonster-{{ member.firstName.toLowerCase() }}.{{ member.lastName.toLowerCase() }}@example.com</p>
+        </div>
+        <a href="/" class="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Powrót do listy</a>
+    </div>
+</body>
+</html>
