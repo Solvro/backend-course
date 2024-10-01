@@ -6,7 +6,7 @@ export default class StudentDepartment extends BaseModel {
   declare id: number
 
   @column()
-  declare student_id: number
+  declare student_id: string
 
   @column()
   declare department_id: number
@@ -16,4 +16,5 @@ export default class StudentDepartment extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
 }
