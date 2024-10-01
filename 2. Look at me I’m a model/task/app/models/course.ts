@@ -1,5 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeSave, column } from '@adonisjs/lucid/orm'
+
+function createSlug(name: string): string {
+  return name
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')         
+    .replace(/[^\w\-]+/g, '')      
+    .replace(/\-\-+/g, '-')       
+    .replace(/^-+/, '')            
+    .replace(/-+$/, '');           
+}
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -12,7 +24,7 @@ export default class Course extends BaseModel {
   declare name: string
 
   @column()
-  declare link: string | null
+  declare link: string 
 
   @column()
   declare description: string | null
@@ -22,4 +34,13 @@ export default class Course extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @beforeSave()
+  public static async createNewUrl(course: Course) {
+    if (course.$dirty) {
+      console.log('Aktualizacja kursu:', course.name)
+      const slug = createSlug(course.name)
+      course.link = `https://solvro.pl/blog/${slug}`
+    }
+  }
 }

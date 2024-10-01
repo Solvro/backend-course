@@ -1,9 +1,9 @@
+import Course from '#models/course'
 import { args, BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import Course from '#models/course'
 
-export default class CreateCourse extends BaseCommand {
-  static commandName = 'create:course'
+export default class Test extends BaseCommand {
+  static commandName = 'create:test'
   static description = ''
 
   static options: CommandOptions = {
@@ -16,7 +16,7 @@ export default class CreateCourse extends BaseCommand {
   @args.string({ default: '1' })
   declare department_id: string;
 
-  @args.string({ default: 'potezny kurs Programistyczny' })
+  @args.string({ default: 'szalony Kurs Programistyczny wow aka ziom' })
   declare name: string
 
   @args.string({ default: 'http://solvro.pl/blog/' })
@@ -35,4 +35,5 @@ export default class CreateCourse extends BaseCommand {
       description: this.description
     })
   }
+
 }
