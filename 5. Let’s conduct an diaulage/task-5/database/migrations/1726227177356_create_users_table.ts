@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('last_name', 50)
       table.enum('status', ['implementing', 'active', 'inactive', 'honorary']).defaultTo('implementing')
       table.string('password').notNullable()
+      table.string('photo_url').nullable()
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()

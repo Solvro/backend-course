@@ -26,6 +26,9 @@ export default class Member extends compose(BaseModel, HashPasswrod) {
   @column({ serializeAs: null })
   declare password: string
 
+  @column()
+  declare photoUrl: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
