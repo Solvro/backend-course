@@ -10,7 +10,7 @@ export default defineConfig({
   | will be scanned automatically from the "./commands" directory.
   |
   */
-  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/mail/commands')],
+  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/mail/commands'), () => import('adonisjs-scheduler/commands')],
 
   /*
   |--------------------------------------------------------------------------
@@ -31,7 +31,11 @@ export default defineConfig({
     () => import('@adonisjs/core/providers/vinejs_provider'),
     () => import('@adonisjs/cors/cors_provider'),
     () => import('@adonisjs/mail/mail_provider'),
-    () => import('@adonisjs/limiter/limiter_provider')
+    () => import('@adonisjs/limiter/limiter_provider'),
+    {
+      file: () => import('adonisjs-scheduler/scheduler_provider'),
+      environment: ['console'],
+    }
   ],
 
   /*
@@ -42,7 +46,10 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('#start/routes'), () => import('#start/kernel')],
+  preloads: [() => import('#start/routes'), () => import('#start/kernel'), {
+    file: () => import('#start/scheduler'),
+    environment: ['console'],
+  }],
 
   /*
   |--------------------------------------------------------------------------
