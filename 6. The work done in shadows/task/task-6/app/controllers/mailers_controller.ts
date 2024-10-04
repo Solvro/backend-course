@@ -10,7 +10,7 @@ export default class MailersController {
     logger.info('Sending email to %s', email)
 
     await mail
-      .send((message) => {
+      .sendLater((message) => {
         message.from('Elo zelo').to(email).subject(subject).text(text)
       })
       .then(() => {
