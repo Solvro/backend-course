@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const AuthController = () => import('#controllers/auth_controller')
 const StudentsController = () => import('#controllers/students_controller')
 
 router
@@ -18,6 +19,9 @@ router
       .apiOnly()
       .params({ students: 'index' })
       .where('index', router.matchers.number())
+      .use(['show', 'update', 'destroy'], middleware.auth({ guards: ['api'] }))
       .use(['store', 'update', 'destroy'], middleware.eloZelo())
+
+    router.post('login', [AuthController, 'login'])
   })
   .prefix('/api/v1')

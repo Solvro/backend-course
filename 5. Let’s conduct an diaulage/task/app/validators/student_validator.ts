@@ -7,7 +7,10 @@ import { Status } from '#models/student'
  */
 export const createStudentValidator = vine.compile(
   vine.object({
-    index: vine.number().range([100000, 999999]),
+    index: vine
+      .number()
+      .range([100000, 999999])
+      .unique(async (db, value) => !(await db.from('students').where('index', value).first())),
     firstName: vine
       .string()
       .trim()
@@ -24,6 +27,7 @@ export const createStudentValidator = vine.compile(
       .transform<string>(
         (value) => value.charAt(0).toUpperCase() + value.substring(1).toLowerCase()
       ),
+    password: vine.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/), // minimum 6 characters, at least one uppercase letter, one lowercase letter and one number
     status: vine.enum(Object.values(Status)),
   })
 )
@@ -52,6 +56,10 @@ export const updateStudentValidator = vine.compile(
         (value) => value.charAt(0).toUpperCase() + value.substring(1).toLowerCase()
       )
       .optional(),
+    password: vine
+      .string()
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)
+      .optional(), // minimum 6 characters, at least one uppercase letter, one lowercase letter and one number
     status: vine.enum(Object.values(Status)).optional(),
   })
 )

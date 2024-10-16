@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.increments('index')
       table.string('first_name', 30).notNullable()
       table.string('last_name', 30).notNullable()
+      table.string('password').notNullable()
       table
         .enum('status', Object.values(Status), {
           useNative: true,

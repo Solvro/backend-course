@@ -7,6 +7,7 @@ export const StudentFactory = factory
       index: Number.parseInt(faker.string.numeric({ length: 6, allowLeadingZeros: false })),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
+      password: faker.internet.password(),
       status: faker.helpers.enumValue(Status),
     }
   })
