@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import { throttleAuth } from '#start/limiter'
 const AuthController = () => import('#controllers/auth_controller')
 const StudentsController = () => import('#controllers/students_controller')
 
@@ -21,7 +22,8 @@ router
       .where('index', router.matchers.number())
       .use(['show', 'update', 'destroy'], middleware.auth({ guards: ['api'] }))
       .use(['store', 'update', 'destroy'], middleware.eloZelo())
+      .use('store', throttleAuth)
 
-    router.post('login', [AuthController, 'login'])
+    router.post('login', [AuthController, 'login']).use(throttleAuth)
   })
   .prefix('/api/v1')
