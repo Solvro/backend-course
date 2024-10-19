@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Student from '#models/student'
 import { createStudentValidator, updateStudentValidator } from '#validators/student_validator'
+import drive from '@adonisjs/drive/services/main'
 
 export default class StudentsController {
   /**
@@ -40,7 +41,7 @@ export default class StudentsController {
    * Show individual record
    */
   async show({ params, logger, auth }: HttpContext) {
-    logger.info('Show student request from %o', await auth.authenticate())
+    logger.info('Show student request from %o', auth.getUserOrFail())
     return await Student.findOrFail(params.index)
   }
 
@@ -48,9 +49,21 @@ export default class StudentsController {
    * Handle form submission for the edit action
    */
   async update({ params, request, logger, auth }: HttpContext) {
-    logger.info('Update student request from %o', await auth.authenticate())
+    logger.info('Update student request from %o', auth.getUserOrFail())
+
     const toUpdate = await Student.findOrFail(params.index)
     toUpdate.merge(await updateStudentValidator.validate(request.body()))
+
+    const image = request.file('profilePhoto', {
+      size: '2mb',
+      extnames: ['png', 'jpg', 'jpeg'],
+    })
+    if (image) {
+      const path = `students/${toUpdate.index}.${image.extname}`
+      await image.moveToDisk(path)
+      toUpdate.merge({ profilePhoto: await drive.use().getUrl(path) })
+    }
+
     return { message: 'Student updated successfully!', student: await toUpdate.save() }
   }
 
@@ -58,7 +71,7 @@ export default class StudentsController {
    * Delete record
    */
   async destroy({ params, logger, auth }: HttpContext) {
-    logger.info('Remove student request from %o', await auth.authenticate())
+    logger.info('Remove student request from %o', auth.getUserOrFail())
     const toDelete = await Student.findOrFail(params.index)
     await toDelete.delete()
     return { message: 'Student deleted successfully!' }

@@ -34,6 +34,9 @@ export default class Student extends compose(BaseModel, AuthFinder) {
   @column()
   declare status: Status
 
+  @column()
+  declare profilePhoto: string
+
   @computed()
   get email(): string {
     return `${this.index}@student.pwr.edu.pl`
