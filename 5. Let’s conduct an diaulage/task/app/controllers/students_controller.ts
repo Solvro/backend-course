@@ -6,7 +6,8 @@ export default class StudentsController {
   /**
    * Display a list of resource
    */
-  async index({ request }: HttpContext) {
+  async index({ request, logger }: HttpContext) {
+    logger.info('Display students request from %s', request.ip())
     const query = Student.query()
 
     // filter
@@ -27,7 +28,8 @@ export default class StudentsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {
+  async store({ request, logger }: HttpContext) {
+    logger.info('Create student request from %s', request.ip())
     return {
       message: 'Student created successfully!',
       student: await Student.create(await createStudentValidator.validate(request.body())),
@@ -37,14 +39,16 @@ export default class StudentsController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {
+  async show({ params, logger, auth }: HttpContext) {
+    logger.info('Show student request from %o', await auth.authenticate())
     return await Student.findOrFail(params.index)
   }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {
+  async update({ params, request, logger, auth }: HttpContext) {
+    logger.info('Update student request from %o', await auth.authenticate())
     const toUpdate = await Student.findOrFail(params.index)
     toUpdate.merge(await updateStudentValidator.validate(request.body()))
     return { message: 'Student updated successfully!', student: await toUpdate.save() }
@@ -53,7 +57,8 @@ export default class StudentsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {
+  async destroy({ params, logger, auth }: HttpContext) {
+    logger.info('Remove student request from %o', await auth.authenticate())
     const toDelete = await Student.findOrFail(params.index)
     await toDelete.delete()
     return { message: 'Student deleted successfully!' }
