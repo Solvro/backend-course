@@ -25,5 +25,9 @@ router
       .use('store', throttleAuth)
 
     router.post('login', [AuthController, 'login']).use(throttleAuth)
+
+    router
+      .get('students/aggregate', [StudentsController, 'aggregate'])
+      .use(middleware.auth({ guards: ['api'] }))
   })
   .prefix('/api/v1')

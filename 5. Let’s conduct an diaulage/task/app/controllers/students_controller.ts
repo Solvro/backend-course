@@ -2,6 +2,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Student from '#models/student'
 import { createStudentValidator, updateStudentValidator } from '#validators/student_validator'
 import drive from '@adonisjs/drive/services/main'
+import StudentService from '#services/student_service'
+import { inject } from '@adonisjs/core'
 
 export default class StudentsController {
   /**
@@ -75,5 +77,11 @@ export default class StudentsController {
     const toDelete = await Student.findOrFail(params.index)
     await toDelete.delete()
     return { message: 'Student deleted successfully!' }
+  }
+
+  @inject()
+  async aggregate({ request, logger, auth }: HttpContext, studentService: StudentService) {
+    logger.info('Aggregate students request from %o', auth.getUserOrFail())
+    return await studentService.aggregateByStatusesAndIndexRange(request.qs().range)
   }
 }
