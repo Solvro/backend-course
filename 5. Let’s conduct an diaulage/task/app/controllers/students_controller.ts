@@ -4,6 +4,7 @@ import { createStudentValidator, updateStudentValidator } from '#validators/stud
 import drive from '@adonisjs/drive/services/main'
 import StudentService from '#services/student_service'
 import { inject } from '@adonisjs/core'
+import db from '@adonisjs/lucid/services/db'
 
 export default class StudentsController {
   /**
@@ -53,20 +54,25 @@ export default class StudentsController {
   async update({ params, request, logger, auth }: HttpContext) {
     logger.info('Update student request from %o', auth.getUserOrFail())
 
-    const toUpdate = await Student.findOrFail(params.index)
-    toUpdate.merge(await updateStudentValidator.validate(request.body()))
+    let toUpdate
+    await db.transaction(async (trx) => {
+      toUpdate = await Student.findOrFail(params.index, { client: trx })
+      toUpdate.merge(await updateStudentValidator.validate(request.body()))
 
-    const image = request.file('profilePhoto', {
-      size: '2mb',
-      extnames: ['png', 'jpg', 'jpeg'],
+      const image = request.file('profilePhoto', {
+        size: '2mb',
+        extnames: ['png', 'jpg', 'jpeg'],
+      })
+      if (image) {
+        const path = `students/${toUpdate.index}.${image.extname}`
+        await image.moveToDisk(path)
+        toUpdate.merge({ profilePhoto: await drive.use().getUrl(path) })
+      }
+
+      await toUpdate.save()
     })
-    if (image) {
-      const path = `students/${toUpdate.index}.${image.extname}`
-      await image.moveToDisk(path)
-      toUpdate.merge({ profilePhoto: await drive.use().getUrl(path) })
-    }
 
-    return { message: 'Student updated successfully!', student: await toUpdate.save() }
+    return { message: 'Student updated successfully!', student: toUpdate }
   }
 
   /**
