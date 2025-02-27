@@ -1,8 +1,7 @@
-const fs = require('fs')
+const fs = require('fs');
 
-const curDate = new Date()
-const minutes = curDate.getMinutes()
+const minutes = new Date().getMinutes();
+const text = 'Elo żelo\n'.repeat(minutes);
 
-const cont = Array(minutes).fill('Elo żelo').join('\n');
-fs.writeFileSync('Elo żelo.txt', cont)
-console.log(cont)
+fs.writeFileSync('./Elo żelo.txt', text);
+console.log(text);
