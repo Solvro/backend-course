@@ -1,18 +1,17 @@
-type Student = {
-    firstName: string
-    lastName: string
-    index: number
+interface Student {
+    firstName: string;
+    lastName: string;
+    index: number;
 }
 
-function getEmail(student: Student): string {
-    return `${student.index}@student.pwr.edu.pl`
-}
+const getStudentEmail = (student: Student): string => {
+    return `${student.index}@student.pwr.edu.pl`;
+};
 
-const stud: Student = {
-    firstName: 'Jakub',
-    lastName: 'Morawiec',
-    index: 272411,
-}
+const debil: Student = {
+    firstName: 'Mateusz',
+    lastName: 'Topczewski',
+    index: 266497,
+};
 
-const email = getEmail(stud)
-console.log(email)
+console.log(getStudentEmail(debil));

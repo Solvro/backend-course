@@ -1,39 +1,37 @@
-const readline = require('node:readline');
-const oneLinerJoke = require('one-liner-joke');
+import readline from 'node:readline';
+import { promisify } from 'util';
+import { getRandomJokeWithTag } from 'one-liner-joke';
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+const ALLOWED_TAGS = ['animal', 'car', 'men', 'women', 'life', 'sport', 'sarcastic'];
 
-const validTags = ['animal', 'car', 'men', 'women', 'life', 'sport', 'sarcastic']
-
-function getCategory() {
-    return new Promise((resolve, reject) => {
-        rl.question('Joke from what category would you like to hear? : ', (category) => {
-            if (validTags.includes(category)) {
-                resolve(category)
-            } else {
-                reject(new Error(`${category} is not a correct joke category (${validTags.join(', ')})`))
-            }
-        })
-    })
-}
-
-function generateJoke(category) {
-    const joke = oneLinerJoke.getRandomJokeWithTag(category)
-    console.log(`Ok, here is the joke: ${joke.body}`)
-}
-
-async function main() {
-    try {
-        const category = await getCategory()
-        generateJoke(category)
-    } catch (error) {
-        console.error(error.message)
-    } finally {
-        rl.close()
+const validateUserTag = (userTag) => {
+    if (!ALLOWED_TAGS.includes(userTag)) {
+        console.log(`${userTag} is not a correct joke category (${ALLOWED_TAGS.join(', ')})`);
+        return false;
     }
-}
+    return true;
+};
 
-main()
+const getUserTag = async () => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    const question = promisify(rl.question).bind(rl);
+    const usersTag = await question(`Joke from what category would you like to hear? : `);
+    rl.close();
+
+    const isValidated = validateUserTag(usersTag);
+    if (!isValidated) process.exit();
+
+    return usersTag;
+};
+
+const generateJoke = (userTag) => {
+    console.log('Ok, here is the joke: ' + getRandomJokeWithTag(userTag).body);
+};
+
+(async () => {
+    generateJoke(await getUserTag());
+})();
