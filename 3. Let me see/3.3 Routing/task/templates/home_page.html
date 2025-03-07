@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Elo Żelo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=2.0">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <p>Hi, I'm Żelo. I'm a jokester. I have a joke for you. Just click the button below.</p>
+
+        <div class="button-grid">
+            <button onclick="window.location.href='/animal'">Animal</button>
+            <button onclick="window.location.href='/car'">Car</button>
+            <button onclick="window.location.href='/men'">Men</button>
+            <button onclick="window.location.href='/women'">Women</button>
+            <button onclick="window.location.href='/life'">Life</button>
+            <button onclick="window.location.href='/sport'">Sport</button>
+            <button onclick="window.location.href='/sarcastic'">Sarcastic</button>
+        </div>
+        
+        <p>The joke: {{joke}}</p>
+
+        <script>
+            function redirectTo(url) {
+                window.location.href = url;
+            }
+        </script>
+
+        <p>Current date: {{date}}</p>
+    </body>
+</html>
