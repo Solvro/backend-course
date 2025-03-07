@@ -14,7 +14,7 @@ Siemanko 👋, niezmiernie miło mi was powitać w ćwiczeniowej części naszeg
 4. [Podstawy API (Let’s communicate) – REST, Headery, Standardy, Dokumentacja](https://docs.google.com/document/d/1Fx9OsVxQAf1jbLaxz3PxtnQ3dx7T9Jn3K2x97-MgK_o/edit)
 5. [API Zaawansowane (Let’s conduct an diaulage)](https://docs.google.com/document/d/1yai1D80VgeqCUw_NdksGRXL2_DRDsV0MRQpukKvIA1M) – Autoryzacja, Optymalizacja, Logi, Websockety, Zdjęcia, Testy
 6. [Procesy w tle (The work done in shadows) – kolejki, maile, powiadomienia](https://docs.google.com/document/d/1M6XstnUshPAXmlVmvo3WG8pS-iXEODxOerYLc8xcxds/edit)
-7. Hostowanie oprogramowania (Let’s the world to see)– docker, vps,  aws, gcp, dns
+7. [Hostowanie oprogramowania (Let’s the world to see)– docker, vps,  aws, gcp, dns](https://docs.google.com/document/d/1xyhekpEz4aIz0S8g7mXKiML_hZfZoM2zGmGasHD7HVc/edit?tab=t.0)
 8. Zakończenie.  Zaprezentowanie prac. (Let’s see what you’ve got/Even the best party must end someday)
 
 ## Jak pracujemy
