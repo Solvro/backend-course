@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "one-liner-joke": "^1.2.2"
+  }
+}

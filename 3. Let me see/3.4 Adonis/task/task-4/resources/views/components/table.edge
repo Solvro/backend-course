@@ -1,0 +1,24 @@
+<table>
+    @assign(fields = fields || Object.keys(data[0]?.$attributes??{}))
+    <tr>
+        @each(header in fields)
+        @if(Array.isArray(header))
+        <th>{{header[0]}}</th>
+        @else
+        <th>{{header}}</th>
+        @endif
+        @endeach
+    </tr>
+
+    @each(record in data)
+    <tr>
+        @each(field in fields)
+        @if(Array.isArray(field))
+        <td> {{{field[1](record)}}}</td>
+        @else
+        <td>{{record[field]}}</td>
+        @endif
+        @endeach
+    </tr>
+    @endeach
+</table>
