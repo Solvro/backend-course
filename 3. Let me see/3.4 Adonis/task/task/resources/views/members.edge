@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Members view
+    </title>
+
+    @vite(['resources/css/app.css'])
+  </head>
+  <body>
+    <h1>
+      Members table
+    </h1>
+    @!component('components/table', {
+      members: members,
+      details: ['Index', 'FirstName', 'LastName',]
+    })
+    @if(page>1)
+      <a href='?page={{page-1}}'>last page</a>
+    @endif
+
+    @if(members.length == 10)
+      <a href='?page={{page+1}}'>Next page</a>
+    @endif
+  </body>
+</html>

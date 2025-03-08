@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        @each(detail in details)
+            <th>{{detail}}</th>
+        @endeach
+    </tr>
+    @each(member in members)
+    <tr>
+        <td>{{member.index}}</td>
+        <td>{{member.firstName}}</td>
+        <td>{{member.lastName}}</td>
+    </tr>
+    @endeach
+</table>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Members view
+    </title>
+
+    @vite(['resources/css/app.css'])
+  </head>
+  <body>
+    <h1>
+      {{ member.index }} member data
+    </h1>
+    <p>{{ member.firstName }} {{ member.lastName }}</p>
+    <p>{{ member.index }}@student.pwr.edu.pl</p>
+    <p>status: {{ member.status }}</p>
+    <h4>data for nerds</h4>
+    <p> created at: {{member.createdAt}} </p>
+    <p> updatedAt at: {{member.updatedAt}} </p>
+  </body>
+</html>
